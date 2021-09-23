@@ -8,7 +8,7 @@
 ## General Info
 This browser based web application to ...
 * Hi my name is Daniel. I'm excited about this project because I am learning a lot about coding and the creation process
-*Hello this is Clayton Hunter. I am looking forward to mastering git and github!
+* Hello this is Clayton Hunter. I am looking forward to mastering git and github!
 	
 * Hi my name is Peter.  I'm excited about this project because I would like to collaborate with others to create a solution for a real-world problem.
 
