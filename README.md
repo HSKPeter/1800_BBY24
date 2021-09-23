@@ -7,6 +7,8 @@
 ## General Info
 This browser based web application to ...
 * Hi my name is Daniel. I'm excited about this project because I am learning a lot about coding and the creation process
+*Hello this is Clayton Hunter. I am looking forward to mastering git and github!
+	
 ## Technologies
 Technologies used for this project:
 * HTML, CSS
