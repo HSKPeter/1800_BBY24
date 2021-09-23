@@ -6,6 +6,7 @@
 
 ## General Info
 This browser based web application to ...
+* Hi My name is Nimrat. I'm excited about this project because I'm going to develop my first project in the real time environment. 
 	
 ## Technologies
 Technologies used for this project:
