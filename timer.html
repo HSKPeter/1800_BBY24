@@ -16,34 +16,7 @@
 
   <!-- Google Icons (Material Design)-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    #playArrowIcon {
-      position: relative;
-      top: 6px;
-      font-size: 24px;
-    }
-
-    .material-icons {
-      font-size: 36px;
-    }
-
-    #appTitle {
-      font-size: 32px;
-    }
-
-    #timer {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      border: 4px solid gray;
-      background-color: white;
-    }
-
-    #time {
-      font-size: 48px;
-      color: gray;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/timer.css">
 </head>
 
 <body>
@@ -59,26 +32,26 @@
     </div>
   </nav>
 
-      <div style="height: 80vh;">
-        <div class="container h-100 d-flex flex-column justify-content-around align-items-center">
-          <div class="col-md-3"></div>
-          <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">            
-            <div>
-              <div class="my-3 d-flex" id="createNewTask">
-                <input type="text" class="form-control" placeholder="Create New Task">
-                <button class="btn btn-secondary ms-2" type="button">Enter</button>
-              </div>
-              <div class="my-3">
-                <select id="selectExistingTasks" class="form-select">
-                  <option selected disabled>Select existing tasks</option>
-                  <option value="Sample Task 1">Sample Task 1</option>
-                  <option value="Sample Task 2">Sample Task 2</option>
-                  <option value="Sample Task 3">Sample Task 3</option>
-                  <option value="Sample Task 4">Sample Task 4</option>
-                </select>
-              </div>
-            </div>   
-            <div class="col-md-3"></div>         
+  <div style="height: 80vh;">
+    <div class="container h-100 d-flex flex-column justify-content-around align-items-center">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+        <div>
+          <div class="my-3 d-flex" id="createNewTask">
+            <input type="text" class="form-control" placeholder="Create New Task">
+            <button class="btn btn-secondary ms-2" type="button">Enter</button>
+          </div>
+          <div class="my-3">
+            <select id="selectExistingTasks" class="form-select">
+              <option selected disabled>Select existing tasks</option>
+              <option value="Sample Task 1">Sample Task 1</option>
+              <option value="Sample Task 2">Sample Task 2</option>
+              <option value="Sample Task 3">Sample Task 3</option>
+              <option value="Sample Task 4">Sample Task 4</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
       </div>
 
       <div id="timer" class="mb-4 ms-auto me-auto d-flex justify-content-center align-items-center">
