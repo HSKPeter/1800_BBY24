@@ -1,0 +1,54 @@
+.large-button {
+  margin-top: 5%;
+  margin-left: 30%;
+  margin-right: 30%;
+  height: 3em;
+  text-align: center;
+}
+
+.quote {
+  display: grid;
+  grid-template-rows: 60% 40%;
+  margin: none;
+  padding: none;
+  border: none;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  width: 10em;
+}
+
+:root {
+  --tasks-rows: 3;
+  --task-gap: 5%;
+}
+
+h1, h2 h3 {
+  text-align: center;
+}
+
+.large-container {
+  height: 70rem;
+}
+
+.task-container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(3, calc(90%  / 3));
+  margin: 2rem 5rem;
+  padding: 1rem;
+  background-color: gray;
+  color: black;
+  gap: var(--task-gap);
+  height: 30em;
+}
+
+.task {
+  display: grid;
+  grid-template-rows: 3rem 5rem;
+  padding: 5% 5%;
+  gap: 20%;
+  background-color: white;
+  text-align: center;
+}
