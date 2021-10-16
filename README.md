@@ -1,6 +1,6 @@
-## My Web Application (Title)
+## Flocus
 
-- [My Web Application (Title)](#my-web-application-title)
+- [Flocus](#flocus)
 - [General Info](#general-info)
 - [Technologies](#technologies)
 - [Content](#content)
