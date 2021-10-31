@@ -24,51 +24,66 @@
             font-size: 32px;
         }
         
-        #xyz {
+        .container {
             display: grid;
-            grid-template-columns: 45% 10% 45%;
-            grid-template-rows: 100px;
+            grid-template-columns: 100%;
+            grid-template-rows: 50% 30% 20%;
+        }
+        
+        #xyz {
+            grid-row-start: 1;
+            grid-row-end: 1;
+            display: grid;
+            grid-template-columns: 30% 40% 30%;
+            grid-template-rows: 100%;
+            margin-bottom: 20%;
+        }
+        
+        #backicon {
+            grid-column-start: 1;
+            grid-column-end: 1;
+            grid-row-start: 1;
+            grid-row-end: 1;
         }
         
         #xyz img {
             grid-column-start: 2;
             grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            margin-left: 20%;
         }
         
-        h1 {
-            text-align: center;
-            color: darkred;
-            margin-top: 50px;
-            float: center;
-            font-size: 5em;
-        }
-        
-        h2 {
-            text-align: center;
-            color: blueviolet;
-            margin-top: 50px;
-            float: center;
-            font-size: 3em;
-        }
-        
-        #well {
+        #buttons {
+            grid-row-start: 2;
+            grid-row-end: 2;
             display: grid;
-            grid-template-columns: 30% 40% 30%;
-            grid-template-rows: 90%;
+            grid-template-columns: 10% 30% 20% 30% 10%;
+            grid-template-rows: 100%;
         }
         
-        #well img {
-            width: 500px;
-            height: 500px;
-            align-items: center;
+        #button1 {
             grid-column-start: 2;
             grid-column-end: 2;
+            margin-left: 25%;
+        }
+        
+        #button2 {
+            grid-column-start: 4;
+            grid-column-end: 4;
         }
         
         p {
-            font-size: 2em;
-            font-weight: 500;
+            grid-row-start: 3;
+            grid-row-end: 3;
             text-align: center;
+            font-weight: bolder;
+            font-style: italic;
+        }
+        
+        .container a {
+            text-decoration: none;
+            color: black;
         }
     </style>
 </head>
@@ -87,47 +102,32 @@
     </nav>
 
     <div class="container">
-        <div id="xyz"><img src="https://cdn.pixabay.com/photo/2021/09/16/05/59/stopwatch-6628441_960_720.png" class="img-fluid" alt="..." border-radius="50%" width="100px" height="100px"></div>
-        <h1>View progress</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">S.No</th>
-                    <th scope="col">Task Name</th>
-                    <th scope="col"> Status</th>
+        <div id="xyz">
+            <div id="backicon">
+                <a href="index.html" class="material-icons">
+                arrow_back
+                </a>
+            </div>
+            <img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/ok-1976099_960_720.png" class="img-fluid" alt="..." border-radius="50%" width=" 30%" height="20%"></div>
+        <div id="buttons">
+            <div id="button1">
+                <a class="btn btn-secondary" href="tasksstatus.html" role="button">View Tasks' Status</a>
+            </div>
+            <div id="button2">
+                <a class="btn btn-secondary" href="progress.html" role="button">View Past Week progress</a>
+            </div>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Task 1</td>
-                    <td>Completed</td>
-
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Task 2</td>
-                    <td>Partially completed</td>
-
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Task 3</td>
-                    <td>Not Completed</td>
-                </tr>
-            </tbody>
-        </table>
-        <h2> Graphical represtation</h2>
-        <div id="well"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqYIIy4yGYrCMBDqEgoNBw-hLTVCFKutOHAA&usqp=CAU" class="img-fluid" alt="..."></div>
-        <p> This is your overall progress.</p>
-
-        <footer class="navbar justify-content-evenly bg-secondary">
+        </div>
+        <p>"A liitle progress each day adds up to big progress"</p>
+    </div>
+    <footer class="navbar justify-content-evenly bg-secondary">
+        <div class="container py-2 mx-5">
             <i class="material-icons text-white">timer</i>
             <i class="material-icons text-white">list</i>
-            <i class="material-icons text-white">bar_chart</i>
-        </footer>
-    </div>
+            <a href="index.html" class="material-icons text-white">bar_chart</a>
+        </div>
+    </footer>
+
 
 
 
