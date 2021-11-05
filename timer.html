@@ -54,15 +54,26 @@
         <div class="col-md-3"></div>
       </div>
 
-      <div class="mb-4 ms-auto me-auto d-flex justify-content-center align-items-center">
-        <div class="progress red"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-          <div class="progress-value text-dark" id="countdownTime">
-            <span id="minute">30</span>
+
+      <div>
+        <div class="circular">
+          <div class="inner"></div>
+          <div class="time">
+            <span id="minute">01</span>
             <span>:</span>
             <span id="second">00</span>
           </div>
+          <div class="circle">
+             <div class="bar left">
+                <div class="progress"></div>
+             </div>
+             <div class="bar right">
+                <div class="progress"></div>
+             </div>
+           </div>
         </div>
       </div>
+
 
       <div class="my-3 d-flex justify-content-center">
         <button class="btn btn-dark" type="button" id="startFlocus">
@@ -86,11 +97,12 @@
   <!--------------------------------------------------->
   <!-- Your Javascript Libraries and scripts go here -->
   <!--------------------------------------------------->
-  <script src="countdown.js"></script>
+
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+  <script src="countdown.js"></script>
 
 </body>
 

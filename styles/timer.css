@@ -12,82 +12,59 @@
   font-size: 32px;
 }
 
-/* Credits to https://bbbootstrap.com/snippets/circle-progress-bar-percent-loading-81242857 */
-.progress {
-  width: 300px;
-  height: 300px;
-  float: left;
-  line-height: 300px;
-  background: none;
-  margin: 20px;
-  box-shadow: none;
-  position: relative
+.circular{
+  height:160px;
+  width: 160px;
+  position: relative;
+  transform:scale(2);
 }
-
-.progress>span {
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
+.circular .inner{
   position: absolute;
-  top: 0;
-  z-index: 1
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  height: 150px;
+  width: 150px;
+  margin: -75px 0 0 -75px;
+  background: white;
+  border-radius: 100%;
+ 
 }
-
-.progress .progress-left {
-  left: 0
-}
-
-.progress .progress-bar {
-  width: 100%;
-  height: 100%;
-  background: none;
-  border-width: 12px;
-  border-style: solid;
+.circular .time{
   position: absolute;
-  top: 0
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  z-index:10;
+  font-size:18px;
+  font-weight:500;
+  color:black;
 }
-
-.progress .progress-left .progress-bar {
-  left: 100%;
-  border-top-right-radius: 150px;
-  border-bottom-right-radius: 150px;
-  border-left: 0;
-  -webkit-transform-origin: center left;
-  transform-origin: center left
-}
-
-.progress .progress-right {
-  right: 0
-}
-
-.progress .progress-right .progress-bar {
-  left: -100%;
-  border-top-left-radius: 150px;
-  border-bottom-left-radius: 150px;
-  border-right: 0;
-  -webkit-transform-origin: center right;
-  transform-origin: center right;
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg)
-}
-
-.progress .progress-value {
-  width: 100%;
+.circular .bar{
+  position: absolute;
   height: 100%;
-  border-radius: 50%;
-  background: #FFF;
-  font-size: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 100%;
+  background: #eee;
+  border-radius: 100%;
+  clip: rect(0px, 160px, 160px, 80px);
 }
-
-.progress.red .progress-bar {
-  border-color: rgb(203, 68, 74)
+.circle .bar .progress{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  clip: rect(0px, 80px, 160px, 0px);
+  background: rgb(204,68,74);;
 }
-
-.progress.red .progress-left .progress-bar {
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg)
+.circle .left .progress{
+  z-index:1;
+  transform: rotate(0deg);
+}
+.circle .right {
+  transform: rotate(180deg);
+  z-index:3;
+ 
+}
+.circle .right .progress{
+  transform: rotate(0deg);
 }
