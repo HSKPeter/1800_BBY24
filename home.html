@@ -39,21 +39,17 @@
             <div class="title">Please fill in the information</div>
           </div>
           <div class="pop-up-body">
-
             <!-- Task Name field -->
-            <div class="task-info">
-                <input type="text" class="form-control" id="task-name" placeholder="Task Name">
-            </div>
-
+            <input type="text" class="form-control" id="task-name" placeholder="Task Name">
+  
             <!-- Due Date-->
             <input class="form-control" id="due-date" placeholder="Task Due Date">
-
-            <div class="task-status" id="status">
+            <div class="task-status" id="status">   
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                  Task Status (Optional)
+                <button class="btn btn-dark dropdown-toggle" type="button" id="due-date-button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Task Status
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="drop-down-due-date">
                   <li><a class="dropdown-item active" href="#">Not-Started</a></li>
                   <li><a class="dropdown-item" href="#">In-Progress</a></li>
                   <li><a class="dropdown-item" href="#">Done</a></li>
@@ -61,11 +57,10 @@
               </div>
             </div>
 
-
             <!-- Task Length -->
             <div class="task-info" id="task-info-container">
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="drop-down-length" data-bs-toggle="dropdown" aria-expanded="false">
                   Length of Task
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
@@ -77,17 +72,14 @@
                 </ul>
               </div>
             </div>
-
             <!-- Ok -->
             <div id="task-length" class="task-info">
-              <button id="finish-task-settings" class="btn btn-light" type="button">Ok</button>
+              <button id="finish-task-settings" class="btn btn-dark" type="button">Ok</button>
             </div>
-
             <!-- Cancel -->
             <div class="task-info">
               <button data-close-button class="btn btn-light cancel-button" type="button">Cancel</button>
             </div>
-
           </div>
         </div>
         <div id="overlay"></div>
@@ -139,7 +131,7 @@
     <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
       <div class="container py-2 mx-5">
         <i class="material-icons text-white">timer</i>
-        <a  href="home.html"><i class="material-icons text-white">list</i></a>
+        <a href="home.html"><i class="material-icons text-white">list</i></a>
         <i class="material-icons text-white">bar_chart</i>
       </div>
     </footer>
