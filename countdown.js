@@ -50,7 +50,7 @@ document.querySelector("#startFlocus").addEventListener("click", () => {
     }
     document.querySelector("#minute").textContent = formatNumbers(minute);
     document.querySelector("#second").textContent = formatNumbers(second);
-    const intervalId = updateTimer(startTime, endTime, 100);
+    const intervalId = updateTimer(startTime, endTime, 10);
     countdownInstance.setIntervalID(intervalId);
 })
 
@@ -68,7 +68,7 @@ document.querySelector("#resumeFlocus").addEventListener("click", () => {
     const endTime = new Date();
     endTime.setMilliseconds(endTime.getMilliseconds() + countdownInstance.getMillisecondsLeft());
     const startTime = endTime - countdownInstance.getSessionLength();
-    const intervalId = updateTimer(startTime, endTime, 100);
+    const intervalId = updateTimer(startTime, endTime, 10);
     countdownInstance.setIntervalID(intervalId);
 })
 
