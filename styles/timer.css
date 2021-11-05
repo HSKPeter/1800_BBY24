@@ -77,3 +77,7 @@
 #pauseFlocus, #stopFlocus, #resumeFlocus{
   display: none;
 }
+
+#controlButtons {
+  width: 240px;
+}
