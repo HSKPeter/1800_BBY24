@@ -33,73 +33,70 @@
   </nav>
 
   <div id="pageBody">
-    <div class="container h-100 d-flex flex-column justify-content-around align-items-center">
-      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-        <div>
-          <div class="my-3 d-flex" id="createNewTask">
-            <input type="text" class="form-control" placeholder="Create New Task">
-            <button class="btn btn-secondary ms-2" type="button">Enter</button>
-          </div>
-          <div class="my-3">
-            <select id="selectExistingTasks" class="form-select">
-              <option selected disabled>Select existing tasks</option>
-              <option value="Sample Task 1">Sample Task 1</option>
-              <option value="Sample Task 2">Sample Task 2</option>
-              <option value="Sample Task 3">Sample Task 3</option>
-              <option value="Sample Task 4">Sample Task 4</option>
-            </select>
-          </div>
+    <div class="container h-100" id="mainContainer">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="my-3">
+          <select id="selectExistingTasks" class="form-select">
+            <option selected disabled>Select existing tasks</option>
+            <option value="Sample Task 1">Sample Task 1</option>
+            <option value="Sample Task 2">Sample Task 2</option>
+            <option value="Sample Task 3">Sample Task 3</option>
+            <option value="Sample Task 4">Sample Task 4</option>
+          </select>
         </div>
-        <div class="col-md-3"></div>
       </div>
 
-
-      <!-- <div style="height: 300px;"> -->
-        <div id="countdownClockContainer">
-          <div class="circular">
-            <div class="inner"></div>
-            <div class="time">
-              <span id="minute">00</span>
-              <span>:</span>
-              <span id="second">30</span>
-            </div>
-            <div class="circle">
-              <div class="bar left">
-                <div class="progress"></div>
+      <div id="countdownClockContainer">
+        <div class="d-flex justify-content-center align-items-center">
+          <div id="countdownClock">
+            <div class="circular">
+              <div class="inner"></div>
+              <div class="time">
+                <span id="minute">00</span>
+                <span>:</span>
+                <span id="second">30</span>
               </div>
-              <div class="bar right">
-                <div class="progress"></div>
+              <div class="circle">
+                <div class="bar left">
+                  <div class="progress"></div>
+                </div>
+                <div class="bar right">
+                  <div class="progress"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      <!-- </div> -->
 
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="d-flex justify-content-center align-items-center flex-column" id="controlButtons">
+            <div>
+              <button class="btn btn-dark" type="button" id="startFlocus">
+                <span><i class="material-icons" id="playArrowIcon">play_arrow</i></span>
+                <span>Start Flocus</span>
+              </button>
+            </div>
+            <div>
+              <button class="btn btn-dark" type="button" id="resumeFlocus">
+                <span><i class="material-icons" id="resumeArrowIcon">play_arrow</i></span>
+                <span>Resume Flocus</span>
+              </button>
+            </div>
+            <div class="w-100 d-flex justify-content-around align-items-center">
+              <button class="btn btn-dark" type="button" id="pauseFlocus">
+                <span><i class="material-icons" id="pauseIcon">pause</i></span>
+                <span>Pause</span>
+              </button>
+              <button class="btn btn-dark" type="button" id="stopFlocus">
+                <span><i class="material-icons" id="stopIcon">stop</i></span>
+                <span>Stop</span>
+              </button>
+            </div>
+          </div>
+        </div>
 
-      <div class="d-flex justify-content-center align-items-center flex-column" id="controlButtons">
-        <div>
-          <button class="btn btn-dark" type="button" id="startFlocus">
-            <span><i class="material-icons" id="playArrowIcon">play_arrow</i></span>
-            <span>Start Flocus</span>
-          </button>
-        </div>
-        <div>
-          <button class="btn btn-dark" type="button" id="resumeFlocus">
-            <span><i class="material-icons" id="resumeArrowIcon">play_arrow</i></span>
-            <span>Resume Flocus</span>
-          </button>
-        </div>
-        <div class="w-100 d-flex justify-content-around align-items-center">
-          <button class="btn btn-dark" type="button" id="pauseFlocus">
-            <span><i class="material-icons" id="pauseIcon">pause</i></span>
-            <span>Pause</span>
-          </button>
-          <button class="btn btn-dark" type="button" id="stopFlocus">
-            <span><i class="material-icons" id="stopIcon">stop</i></span>
-            <span>Stop</span>
-          </button>
-        </div>
       </div>
+
     </div>
   </div>
 

@@ -2,6 +2,12 @@
   height: 80vh;
 }
 
+#mainContainer{
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 20% 80%;
+}
+
 #playArrowIcon, #pauseIcon, #stopIcon, #resumeArrowIcon {
   position: relative;
   top: 6px;
@@ -17,6 +23,12 @@
 }
 
 #countdownClockContainer {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 50%;
+}
+
+#countdownClock {
   height: 240px;
   width: 240px;
 }
