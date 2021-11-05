@@ -1,26 +1,94 @@
-#playArrowIcon {
-    position: relative;
-    top: 6px;
-    font-size: 24px;
-  }
+#pageBody {
+  height: 80vh;
+  min-height: 800px;
+}
 
-  .material-icons {
-    font-size: 36px;
-  }
+#playArrowIcon, #pauseIcon, #stopIcon, #resumeArrowIcon {
+  position: relative;
+  top: 6px;
+  font-size: 24px;
+}
 
-  #appTitle {
-    font-size: 32px;
-  }
+.material-icons {
+  font-size: 36px;
+}
 
-  #timer {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 4px solid gray;
-    background-color: white;
-  }
+#appTitle {
+  font-size: 32px;
+}
 
-  #time {
-    font-size: 48px;
-    color: gray;
-  }
+#countdownClockContainer {
+  height: 120px;
+  width: 120px;
+}
+
+.circular {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  transform: scale(2);
+}
+
+.circular .inner {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  height: 96%;
+  width: 96%;
+  margin: -48% 0 0 -48%;
+  background: white;
+  border-radius: 100%;
+}
+
+.circular .time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  font-size: 18px;
+  font-weight: 500;
+  color: black;
+}
+
+.circular .bar {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #eee;
+  border-radius: 100%;
+  clip: rect(0px, 120px, 120px, 60px);
+}
+
+.circle .bar .progress {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  clip: rect(0px, 60px, 120px, 0px);
+  background: rgb(204, 68, 74);
+  ;
+}
+
+.circle .left .progress {
+  z-index: 1;
+  transform: rotate(0deg);
+}
+
+.circle .right {
+  transform: rotate(180deg);
+  z-index: 3;
+}
+
+.circle .right .progress {
+  transform: rotate(0deg);
+}
+
+#pauseFlocus, #stopFlocus, #resumeFlocus {
+  display: none;
+}
+
+#controlButtons {
+  width: 240px;
+}
