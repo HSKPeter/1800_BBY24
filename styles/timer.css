@@ -1,0 +1,70 @@
+#playArrowIcon {
+  position: relative;
+  top: 6px;
+  font-size: 24px;
+}
+
+.material-icons {
+  font-size: 36px;
+}
+
+#appTitle {
+  font-size: 32px;
+}
+
+.circular{
+  height:160px;
+  width: 160px;
+  position: relative;
+  transform:scale(2);
+}
+.circular .inner{
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  height: 150px;
+  width: 150px;
+  margin: -75px 0 0 -75px;
+  background: white;
+  border-radius: 100%;
+ 
+}
+.circular .time{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  z-index:10;
+  font-size:18px;
+  font-weight:500;
+  color:black;
+}
+.circular .bar{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #eee;
+  border-radius: 100%;
+  clip: rect(0px, 160px, 160px, 80px);
+}
+.circle .bar .progress{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  clip: rect(0px, 80px, 160px, 0px);
+  background: rgb(204,68,74);;
+}
+.circle .left .progress{
+  z-index:1;
+  transform: rotate(0deg);
+}
+.circle .right {
+  transform: rotate(180deg);
+  z-index:3;
+ 
+}
+.circle .right .progress{
+  transform: rotate(0deg);
+}
