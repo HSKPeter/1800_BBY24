@@ -1,0 +1,132 @@
+/***** Main page *****/
+
+#new-task-button {
+  font-size: 4vw;
+}
+
+#edit-task-button {
+  font-size: 4vw;
+}
+
+h1, h2 h3 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 6vw;
+}
+
+h2 {
+  font-size: 5vw;
+}
+
+p {
+  font-size: 3vw;
+}
+
+.task-container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(3, calc(100%  / 3));
+  margin: 5%;
+  padding: 1%;
+  background-color: gray;
+  color: black;
+  border-width: 2%;
+}
+
+.task {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  padding: 5% 5%;
+  background-color: white;
+  text-align: center;
+}
+
+button {
+  width: 90%;
+  margin: 1.5% 0;
+  margin-left: 5%;
+}
+
+.blockquote-footer {
+  font-size: 2vw;
+}
+
+/***** POPUP *****/
+
+.pop-up {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 250ms ease-in-out;
+  border: 2px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 70vw;
+  height: 70vh;
+}
+
+.pop-up.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.pop-up {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 20% 80%;
+}
+
+.pop-up-header {
+  padding-bottom: 5%;
+  align-self: center;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.pop-up-header .title {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.pop-up-body {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(6, 1fr);
+  padding: 5%;
+  align-items: center;
+}
+
+.pop-up-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 5vw;
+  font-weight: bold;
+}
+
+.body {
+  padding: 10px 15px;
+}
+
+#overlay {
+  position: fixed;
+  /*opacity: 0;*/
+  transition: 250ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none; /* gets rid of click events for main menu when in popup menu */
+}
+
+#overlay.active {
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
