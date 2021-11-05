@@ -27,12 +27,13 @@ p {
 .task-container {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: repeat(3, calc(100%  / 3));
+  grid-template-rows: 1fr, 1fr, 1fr;
   margin: 5%;
   padding: 1%;
   background-color: gray;
   color: black;
   border-width: 2%;
+  overflow-y: scroll;
 }
 
 .task {
@@ -48,6 +49,13 @@ button {
   margin: 1.5% 0;
   margin-left: 5%;
 }
+
+input {
+  max-width: 90%;
+  margin: 1.5% 0;
+  margin-left: 5%;
+}
+
 
 .blockquote-footer {
   font-size: 2vw;
@@ -80,7 +88,6 @@ button {
 }
 
 .pop-up-header {
-  padding-bottom: 5%;
   align-self: center;
   text-align: center;
   border-bottom: 1px solid black;
