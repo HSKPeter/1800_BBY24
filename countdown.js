@@ -1,9 +1,46 @@
+class Countdown {
+    #intervalID;
+    #sessionLength;
+    #millisecondsLeft;
+
+    constructor(){};
+    
+    setIntervalID(id){
+        this.#intervalID = id;
+    }
+
+    getIntervalID(){
+        return this.#intervalID;
+    }
+
+    setSessionLength(sessionLength){
+        this.#sessionLength = sessionLength;
+    }
+
+    getSessionLength(){
+        return this.#sessionLength;
+    }
+
+    setMillisecondsLeft(ms){
+        this.#millisecondsLeft = ms;
+    }
+
+    getMillisecondsLeft(){
+        return this.#millisecondsLeft
+    }
+
+}
+
+const countdownInstance = new Countdown();
+
 document.querySelector("#startFlocus").addEventListener("click", () => {
+    document.querySelector("#startFlocus").style.display = "none";
+    document.querySelector("#pauseFlocus").style.display = "block";
+    document.querySelector("#stopFlocus").style.display = "block";
     const startTime = new Date();
     const endTime = startCountDown(startTime);
     let minute = parseInt(document.querySelector("#minute").textContent);
     let second = parseInt(document.querySelector("#second").textContent);
-    console.log(((1000 / (endTime - startTime)) * 360))
     document.querySelector('.circle .left .progress').style.transform = "rotate(" + ((1000 / (endTime - startTime)) * 360) + "deg)";
     if (second === 0){
         minute --;
@@ -13,7 +50,26 @@ document.querySelector("#startFlocus").addEventListener("click", () => {
     }
     document.querySelector("#minute").textContent = formatNumbers(minute);
     document.querySelector("#second").textContent = formatNumbers(second);
-    updateTimer(startTime, endTime);
+    const intervalId = updateTimer(startTime, endTime, 100);
+    countdownInstance.setIntervalID(intervalId);
+})
+
+document.querySelector("#pauseFlocus").addEventListener("click", () => {
+    document.querySelector("#pauseFlocus").style.display = "none";
+    document.querySelector("#stopFlocus").style.display = "none";
+    document.querySelector("#resumeFlocus").style.display = "block";    
+    clearInterval(countdownInstance.getIntervalID());
+})
+
+document.querySelector("#resumeFlocus").addEventListener("click", () => {
+    document.querySelector("#pauseFlocus").style.display = "block";
+    document.querySelector("#stopFlocus").style.display = "block";
+    document.querySelector("#resumeFlocus").style.display = "none";    
+    const endTime = new Date();
+    endTime.setMilliseconds(endTime.getMilliseconds() + countdownInstance.getMillisecondsLeft());
+    const startTime = endTime - countdownInstance.getSessionLength();
+    const intervalId = updateTimer(startTime, endTime, 100);
+    countdownInstance.setIntervalID(intervalId);
 })
 
 function startCountDown(startTime){
@@ -22,15 +78,17 @@ function startCountDown(startTime){
     const endTime = new Date(startTime.getTime());
     endTime.setMinutes(endTime.getMinutes() + parseInt(minute));
     endTime.setSeconds(endTime.getSeconds() + parseInt(second));
+    countdownInstance.setSessionLength(endTime - startTime);
     return endTime;
 }
 
-function updateTimer(startTime, endTime){
-    const interval = setInterval(function() {
+function updateTimer(startTime, endTime, ms){
+    const intervalId = setInterval(function() {
         const current = new Date().getTime();
         const difference = endTime - current;
+        countdownInstance.setMillisecondsLeft(difference)
         if (difference < 1) {
-            clearInterval(interval);
+            clearInterval(intervalId);
             document.querySelector("#minute").textContent = formatNumbers(0);
             document.querySelector("#second").textContent = formatNumbers(0);
         } else {
@@ -40,7 +98,8 @@ function updateTimer(startTime, endTime){
             document.querySelector("#second").textContent = formatNumbers(seconds);
             updateProgressBar(startTime, endTime)
         }
-    }, 10);
+    }, ms);
+    return intervalId;
 }
 
 function formatNumbers(num){
@@ -56,13 +115,19 @@ function updateProgressBar(startTime, endTime){
     const current = new Date().getTime();
     const msPassed = current - startTime;
     const progress = (msPassed + 1000) / sessionLengthInMs;
+    // countdownInstance.setProgress(progress);
     if (progress < 0.5){
         const degree = progress * 360;
-        console.log(degree)
         document.querySelector('.circle .left .progress').style.transform = "rotate(" + degree + "deg)";
     } else {
         document.querySelector('.circle .left .progress').style.transform = "rotate(" + 180 + "deg)";
         const degree = Math.min((progress - 0.5) * 360, 180);
         document.querySelector('.circle .right .progress').style.transform = "rotate(" + degree + "deg)";
     }
+}
+
+function assumeStartTime(progress, sessionLengthInMs){
+    const current = new Date().getTime();
+    const msPassed = sessionLengthInMs * progress;
+    return current - msPassed;
 }

@@ -55,13 +55,13 @@
       </div>
 
 
-      <div>
+      <div id="countdownClockContainer">
         <div class="circular">
           <div class="inner"></div>
           <div class="time">
-            <span id="minute">01</span>
+            <span id="minute">00</span>
             <span>:</span>
-            <span id="second">00</span>
+            <span id="second" contenteditable>30</span>
           </div>
           <div class="circle">
              <div class="bar left">
@@ -75,11 +75,29 @@
       </div>
 
 
-      <div class="my-3 d-flex justify-content-center">
-        <button class="btn btn-dark" type="button" id="startFlocus">
-          <span><i class="material-icons" id="playArrowIcon">play_arrow</i></span>
-          <span>Start Flocus</span>
-        </button>
+      <div class="w-100 my-3 d-flex justify-content-center align-items-center flex-column">
+        <div>
+          <button class="btn btn-dark" type="button" id="startFlocus">
+            <span><i class="material-icons" id="playArrowIcon">play_arrow</i></span>
+            <span>Start Flocus</span>
+          </button>
+        </div>
+        <div>
+          <button class="btn btn-dark" type="button" id="resumeFlocus">
+            <span><i class="material-icons" id="resumeArrowIcon">play_arrow</i></span>
+            <span>Resume Flocus</span>
+          </button>
+        </div>
+        <div class="w-100 d-flex justify-content-around align-items-center">
+          <button class="btn btn-dark" type="button" id="pauseFlocus">
+            <span><i class="material-icons" id="pauseIcon">pause</i></span>
+            <span>Pause</span>
+          </button>
+          <button class="btn btn-dark" type="button" id="stopFlocus">
+            <span><i class="material-icons" id="stopIcon">stop</i></span>
+            <span>Stop</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
