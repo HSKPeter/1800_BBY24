@@ -1,3 +1,8 @@
+#pageBody {
+  height: 80vh;
+  min-height: 800px;
+}
+
 #playArrowIcon, #pauseIcon, #stopIcon, #resumeArrowIcon {
   position: relative;
   top: 6px;
@@ -12,18 +17,19 @@
   font-size: 32px;
 }
 
-#countdownClockContainer{
-  height:120px;
+#countdownClockContainer {
+  height: 120px;
   width: 120px;
 }
 
-.circular{
-  height:100%;
+.circular {
+  height: 100%;
   width: 100%;
   position: relative;
-  transform:scale(2);
+  transform: scale(2);
 }
-.circular .inner{
+
+.circular .inner {
   position: absolute;
   z-index: 6;
   top: 50%;
@@ -33,19 +39,20 @@
   margin: -48% 0 0 -48%;
   background: white;
   border-radius: 100%;
- 
 }
-.circular .time{
+
+.circular .time {
   position: absolute;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  z-index:10;
-  font-size:18px;
-  font-weight:500;
-  color:black;
+  z-index: 10;
+  font-size: 18px;
+  font-weight: 500;
+  color: black;
 }
-.circular .bar{
+
+.circular .bar {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -53,28 +60,32 @@
   border-radius: 100%;
   clip: rect(0px, 120px, 120px, 60px);
 }
-.circle .bar .progress{
+
+.circle .bar .progress {
   position: absolute;
   height: 100%;
   width: 100%;
   border-radius: 100%;
   clip: rect(0px, 60px, 120px, 0px);
-  background: rgb(204,68,74);;
+  background: rgb(204, 68, 74);
+  ;
 }
-.circle .left .progress{
-  z-index:1;
-  transform: rotate(0deg);
-}
-.circle .right {
-  transform: rotate(180deg);
-  z-index:3;
- 
-}
-.circle .right .progress{
+
+.circle .left .progress {
+  z-index: 1;
   transform: rotate(0deg);
 }
 
-#pauseFlocus, #stopFlocus, #resumeFlocus{
+.circle .right {
+  transform: rotate(180deg);
+  z-index: 3;
+}
+
+.circle .right .progress {
+  transform: rotate(0deg);
+}
+
+#pauseFlocus, #stopFlocus, #resumeFlocus {
   display: none;
 }
 
