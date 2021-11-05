@@ -1,6 +1,5 @@
 #pageBody {
   height: 80vh;
-  min-height: 800px;
 }
 
 #playArrowIcon, #pauseIcon, #stopIcon, #resumeArrowIcon {
@@ -18,15 +17,14 @@
 }
 
 #countdownClockContainer {
-  height: 120px;
-  width: 120px;
+  height: 240px;
+  width: 240px;
 }
 
 .circular {
   height: 100%;
   width: 100%;
   position: relative;
-  transform: scale(2);
 }
 
 .circular .inner {
@@ -47,7 +45,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  font-size: 18px;
+  font-size: 36px;
   font-weight: 500;
   color: black;
 }
@@ -58,7 +56,7 @@
   width: 100%;
   background: #eee;
   border-radius: 100%;
-  clip: rect(0px, 120px, 120px, 60px);
+  clip: rect(0px, 240px, 240px, 120px);
 }
 
 .circle .bar .progress {
@@ -66,7 +64,7 @@
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  clip: rect(0px, 60px, 120px, 0px);
+  clip: rect(0px, 120px, 240px, 0px);
   background: rgb(204, 68, 74);
   ;
 }
