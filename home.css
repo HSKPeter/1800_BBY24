@@ -88,9 +88,11 @@ input {
 }
 
 .pop-up-header {
-  align-self: center;
+  align-self: center;  
   text-align: center;
   border-bottom: 1px solid black;
+  background-color: rgb(49, 124, 246);
+  color:white;  
 }
 
 .pop-up-header .title {
