@@ -8,11 +8,6 @@
   grid-template-rows: 20% 80%;
 }
 
-#playArrowIcon, #pauseIcon, #stopIcon, #resumeArrowIcon {
-  position: relative;
-  top: 6px;
-  font-size: 24px;
-}
 
 .material-icons {
   font-size: 36px;

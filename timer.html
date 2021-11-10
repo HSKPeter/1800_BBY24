@@ -13,9 +13,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-  <!-- Google Icons (Material Design)-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="styles/timer.css">
 </head>
 
@@ -68,36 +66,42 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center flex-column">
           <div class="d-flex justify-content-center align-items-center flex-column" id="controlButtons">
             <div>
               <button class="btn btn-secondary" type="button" id="startFlocus">
-                <span><i class="material-icons" id="playArrowIcon">play_arrow</i></span>
+                <i class="bi bi-play-fill"></i>
                 <span>Start Flocus</span>
               </button>
             </div>
             <div>
               <button class="btn btn-secondary" type="button" id="resumeFlocus">
-                <span><i class="material-icons" id="resumeArrowIcon">play_arrow</i></span>
+                <i class="bi bi-play-fill"></i>
                 <span>Resume Flocus</span>
               </button>
             </div>
             <div class="w-100 d-flex justify-content-around align-items-center">
               <button class="btn btn-secondary" type="button" id="pauseFlocus">
-                <span><i class="material-icons" id="pauseIcon">pause</i></span>
+                <i class="bi bi-pause-fill"></i>
                 <span>Pause</span>
               </button>
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="stopFlocus" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span><i class="material-icons" id="stopIcon">stop</i></span>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="stopFlocus"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-stop-fill"></i>
                   <span>Stop</span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">End Session Early</a></li>
-                  <li><a class="dropdown-item" href="#">Cancel Session</a></li>
+                  <li><a class="dropdown-item" href="#">Quit Session</a></li>
                 </ul>
               </div>
             </div>
+          </div>
+          <div class="mt-4">
+            <button class="btn btn-secondary" type="button" id="music">
+              <i class="bi bi-volume-up-fill"></i>
+            </button>
           </div>
         </div>
 
@@ -112,26 +116,6 @@
       <i class="material-icons text-white">bar_chart</i>
     </div>
   </footer>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer d-flex justify-content-around">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
   <!--------------------------------------------------->
   <!-- Your Javascript Libraries and scripts go here -->
