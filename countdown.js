@@ -51,8 +51,7 @@ document.querySelector("#music").addEventListener("click", () => {
     isPlayingMusic = !isPlayingMusic;
 })
 
-
-document.querySelector("#startFlocus").addEventListener("click", () => {    
+function initTimer(){
     document.querySelector("#startFlocus").style.display = "none";
     document.querySelector("#music").style.display = "block";
     document.querySelector("audio").play();
@@ -77,29 +76,41 @@ document.querySelector("#startFlocus").addEventListener("click", () => {
     document.querySelector("#second").textContent = formatNumbers(second);
     const intervalId = updateTimer(startTime, endTime, 10);
     countdownInstance.setIntervalID(intervalId);
-})
+}
+
+document.querySelector("#startFlocus").addEventListener("click", initTimer)
 
 document.querySelector("#pauseFlocus").addEventListener("click", () => {
     document.querySelector("#pauseFlocus").style.display = "none";
     document.querySelector("#stopFlocus").style.display = "none";
-    document.querySelector("#music").style.display = "none";
-    document.querySelector("audio").pause();
-    document.querySelector("#resumeFlocus").style.display = "block";    
-    clearInterval(countdownInstance.getIntervalID());
+    document.querySelector("#music").style.display = "none";    
+    document.querySelector("#resumeFlocus").style.display = "block";  
+    pauseFlocus();    
 })
 
-document.querySelector("#resumeFlocus").addEventListener("click", () => {
-    document.querySelector("#pauseFlocus").style.display = "block";
-    document.querySelector("#stopFlocus").style.display = "block";
-    document.querySelector("#music").style.display = "block";
+function pauseFlocus(){
+    clearInterval(countdownInstance.getIntervalID());
+    document.querySelector("audio").pause();
+}
+
+function resumeFlocus(){
     document.querySelector("audio").play();
-    document.querySelector("#resumeFlocus").style.display = "none";    
-    const endTime = new Date();
+    const endTime = new Date();    
     endTime.setMilliseconds(endTime.getMilliseconds() + countdownInstance.getMillisecondsLeft());
     const startTime = endTime - countdownInstance.getSessionLength();
     const intervalId = updateTimer(startTime, endTime, 10);
     countdownInstance.setIntervalID(intervalId);
+}
+
+document.querySelector("#resumeFlocus").addEventListener("click", () => {
+    document.querySelector("#pauseFlocus").style.display = "block";
+    document.querySelector("#stopFlocus").style.display = "block";
+    document.querySelector("#music").style.display = "block";    
+    document.querySelector("#resumeFlocus").style.display = "none";        
+    resumeFlocus();
 })
+
+
 
 function startCountDown(startTime){
     const minute = document.querySelector("#minute").textContent;
@@ -127,9 +138,25 @@ function updateTimer(startTime, endTime, ms){
             document.querySelector("#second").textContent = formatNumbers(seconds);
             updateProgressBar(startTime, endTime)
         }
+
+        if (difference < 1000){
+            clearInterval(intervalId);
+            const modalOfSessionEnd = new bootstrap.Modal(document.getElementById('sessionEnd'))
+            modalOfSessionEnd.show()
+        }
     }, ms);
     return intervalId;
 }
+
+document.querySelector("#endSessionEarly").addEventListener("click", () => {
+    pauseFlocus();
+    const modalOfSessionEnd = new bootstrap.Modal(document.getElementById('sessionEndEarly'))
+    modalOfSessionEnd.show()
+})
+
+document.querySelectorAll('.closeModalOfSessionEndEarly').forEach(element => element.addEventListener('click', () => {
+    resumeFlocus();
+}))
 
 function formatNumbers(num){
     const numInStringForm = num.toString()
@@ -164,3 +191,9 @@ function assumeStartTime(progress, sessionLengthInMs){
     const msPassed = sessionLengthInMs * progress;
     return current - msPassed;
 }
+
+document.querySelector("#timeSetting").addEventListener('keydown', (event) => {
+    if (event.key === "Enter"){
+        initTimer();
+    }
+});
