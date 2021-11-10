@@ -33,10 +33,35 @@ class Countdown {
 
 const countdownInstance = new Countdown();
 
-document.querySelector("#startFlocus").addEventListener("click", () => {
+document.querySelectorAll("input").forEach(inputField => inputField.addEventListener("change", () => {
+    inputField.value = formatNumbers(inputField.value);
+}))
+
+document.querySelector("#music").addEventListener("click", () => {
+    let isPlayingMusic = document.querySelector("#music").dataset.music === 'on'
+    if (isPlayingMusic){
+        document.querySelector("#music").dataset.music = 'off';
+        document.querySelector("#music").innerHTML = '<i class="bi bi-volume-mute-fill"></i>';
+        document.querySelector('audio').muted = true;
+    } else {
+        document.querySelector("#music").dataset.music = 'on';
+        document.querySelector("#music").innerHTML = '<i class="bi bi-volume-up-fill"></i>';
+        document.querySelector('audio').muted = false;
+    }
+    isPlayingMusic = !isPlayingMusic;
+})
+
+
+document.querySelector("#startFlocus").addEventListener("click", () => {    
     document.querySelector("#startFlocus").style.display = "none";
+    document.querySelector("#music").style.display = "block";
+    document.querySelector("audio").play();
     document.querySelector("#pauseFlocus").style.display = "block";
     document.querySelector("#stopFlocus").style.display = "block";
+    
+    document.querySelector("#minute").textContent = document.querySelector("#minuteInput").value;
+    document.querySelector("#second").textContent = document.querySelector("#secondInput").value;
+
     const startTime = new Date();
     const endTime = startCountDown(startTime);
     let minute = parseInt(document.querySelector("#minute").textContent);
@@ -57,6 +82,8 @@ document.querySelector("#startFlocus").addEventListener("click", () => {
 document.querySelector("#pauseFlocus").addEventListener("click", () => {
     document.querySelector("#pauseFlocus").style.display = "none";
     document.querySelector("#stopFlocus").style.display = "none";
+    document.querySelector("#music").style.display = "none";
+    document.querySelector("audio").pause();
     document.querySelector("#resumeFlocus").style.display = "block";    
     clearInterval(countdownInstance.getIntervalID());
 })
@@ -64,6 +91,8 @@ document.querySelector("#pauseFlocus").addEventListener("click", () => {
 document.querySelector("#resumeFlocus").addEventListener("click", () => {
     document.querySelector("#pauseFlocus").style.display = "block";
     document.querySelector("#stopFlocus").style.display = "block";
+    document.querySelector("#music").style.display = "block";
+    document.querySelector("audio").play();
     document.querySelector("#resumeFlocus").style.display = "none";    
     const endTime = new Date();
     endTime.setMilliseconds(endTime.getMilliseconds() + countdownInstance.getMillisecondsLeft());

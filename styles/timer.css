@@ -48,7 +48,7 @@
 
 .circular .time {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
@@ -90,10 +90,16 @@
   transform: rotate(0deg);
 }
 
-#pauseFlocus, #stopFlocus, #resumeFlocus {
+#pauseFlocus, #stopFlocus, #resumeFlocus, #music {
   display: none;
 }
 
 #controlButtons {
   width: 240px;
+}
+
+#minuteInput, #secondInput {
+  display: inline;
+  width: 44px;
+  padding: 0;
 }

@@ -47,16 +47,22 @@
           </select>
         </div>
       </div>
-
+      
       <div id="countdownClockContainer">
         <div class="d-flex justify-content-center align-items-center">
           <div id="countdownClock">
             <div class="circular">
               <div class="inner"></div>
               <div class="time">
-                <span id="minute">25</span>
+                <span id="minute">
+                  <input type="number" class="form-control" placeholder="MM" value="25" min="0" max="99" id="minuteInput">
+                </span>
+                
                 <span>:</span>
-                <span id="second">00</span>
+                <span id="second">
+                  <input type="number" class="form-control" placeholder="ss" value="00" min="00" max="59" id="secondInput">
+                </span>
+                
               </div>
               <div class="circle">
                 <div class="bar left">
@@ -102,7 +108,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <button class="btn btn-secondary" type="button" id="music">
+            <button class="btn btn-secondary" type="button" id="music" data-music="on">
               <i class="bi bi-volume-up-fill"></i>
             </button>
           </div>
@@ -112,6 +118,7 @@
     </div>
   </div>
 
+
   <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
     <div class="container py-2 mx-5">
       <i class="material-icons text-white">timer</i>
@@ -119,7 +126,10 @@
       <i class="material-icons text-white">bar_chart</i>
     </div>
   </footer>
-
+  <audio>
+    <source src="flocus-music.m4a">
+  </audio>
+  
   <!--------------------------------------------------->
   <!-- Your Javascript Libraries and scripts go here -->
   <!--------------------------------------------------->
