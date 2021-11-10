@@ -1,9 +1,12 @@
-class Countdown {
+class Timer {
     #intervalID;
     #sessionLength;
     #millisecondsLeft;
+    #isPlayingMusic;
 
-    constructor(){};
+    constructor(){
+        this.#isPlayingMusic = true;
+    };
     
     setIntervalID(id){
         this.#intervalID = id;
@@ -29,88 +32,113 @@ class Countdown {
         return this.#millisecondsLeft
     }
 
+    init(){
+        if (document.querySelector('select').value === ''){
+            alert("Please choose a task in the dropdown menu.")
+            return;
+        }
+        document.querySelector("#task").innerHTML = `
+        <strong>
+        <div class="d-flex flex-column">
+        <div>Task of this Flocus session:</div>
+        <div>${document.querySelector('select').value}</div>
+        </div>
+        </strong>
+        `;
+        document.querySelector("#startFlocus").style.display = "none";
+        document.querySelector("#music").style.display = "block";
+        document.querySelector("audio").play();
+        document.querySelector("#pauseFlocus").style.display = "block";
+        document.querySelector("#stopFlocus").style.display = "block";
+        
+        document.querySelector("#minute").textContent = document.querySelector("#minuteInput").value;
+        document.querySelector("#second").textContent = document.querySelector("#secondInput").value;
+    
+        const startTime = new Date();
+        const endTime = startCountDown(startTime);
+        let minute = parseInt(document.querySelector("#minute").textContent);
+        let second = parseInt(document.querySelector("#second").textContent);
+        document.querySelector('.circle .left .progress').style.transform = "rotate(" + ((1000 / (endTime - startTime)) * 360) + "deg)";
+        if (second === 0){
+            minute --;
+            second = 59;
+        } else {
+            second --;
+        }
+        document.querySelector("#minute").textContent = formatNumbers(minute);
+        document.querySelector("#second").textContent = formatNumbers(second);
+        const intervalId = updateTimer(startTime, endTime, 10);
+        timerInstance.setIntervalID(intervalId);
+    }
+
+    pause(){
+        document.querySelector("#pauseFlocus").style.display = "none";
+        document.querySelector("#stopFlocus").style.display = "none";
+        document.querySelector("#music").style.display = "none";    
+        document.querySelector("#resumeFlocus").style.display = "block";  
+        clearInterval(this.#intervalID);
+        document.querySelector("audio").pause();
+    }
+
+    stop(){
+        clearInterval(this.#intervalID);
+        document.querySelector("audio").pause();
+    }
+
+    resume(){
+        document.querySelector("#pauseFlocus").style.display = "block";
+        document.querySelector("#stopFlocus").style.display = "block";
+        document.querySelector("#music").style.display = "block";    
+        document.querySelector("#resumeFlocus").style.display = "none";  
+
+        document.querySelector("audio").play();
+        
+        const endTime = new Date();    
+        endTime.setMilliseconds(endTime.getMilliseconds() + timerInstance.getMillisecondsLeft());
+        const startTime = endTime - timerInstance.getSessionLength();
+        const intervalId = updateTimer(startTime, endTime, 10);
+        timerInstance.setIntervalID(intervalId);
+    }
+
+    changeMusicSetting(){
+        if (this.#isPlayingMusic === true){
+            document.querySelector("#music").dataset.music = 'off';
+            document.querySelector("#music").innerHTML = '<i class="bi bi-volume-mute-fill"></i>';
+            document.querySelector('audio').muted = true;
+        } else {
+            document.querySelector("#music").dataset.music = 'on';
+            document.querySelector("#music").innerHTML = '<i class="bi bi-volume-up-fill"></i>';
+            document.querySelector('audio').muted = false;
+        }
+        this.#isPlayingMusic = !this.#isPlayingMusic;
+    }
+
 }
 
-const countdownInstance = new Countdown();
+const timerInstance = new Timer();
+
+
+document.querySelector("#startFlocus").addEventListener("click", () => {timerInstance.init()})
+document.querySelector("#timeSetting").addEventListener('keydown', (event) => {
+    if (event.key === "Enter"){
+        timerInstance.init();
+    }
+});
+
+document.querySelector("#music").addEventListener("click", () => {timerInstance.changeMusicSetting()});
+
+document.querySelector("#pauseFlocus").addEventListener("click", () => {timerInstance.pause()})
+document.querySelector("#resumeFlocus").addEventListener("click", () => {timerInstance.resume()})
+
+document.querySelectorAll('.resumeCountDown').forEach(element => element.addEventListener('click', () => {timerInstance.resume()}));
+document.querySelectorAll('.pauseCountDown').forEach(element => element.addEventListener('click', () => {
+    timerInstance.stop();
+}));
+
 
 document.querySelectorAll("input").forEach(inputField => inputField.addEventListener("change", () => {
     inputField.value = formatNumbers(inputField.value);
 }))
-
-document.querySelector("#music").addEventListener("click", () => {
-    let isPlayingMusic = document.querySelector("#music").dataset.music === 'on'
-    if (isPlayingMusic){
-        document.querySelector("#music").dataset.music = 'off';
-        document.querySelector("#music").innerHTML = '<i class="bi bi-volume-mute-fill"></i>';
-        document.querySelector('audio').muted = true;
-    } else {
-        document.querySelector("#music").dataset.music = 'on';
-        document.querySelector("#music").innerHTML = '<i class="bi bi-volume-up-fill"></i>';
-        document.querySelector('audio').muted = false;
-    }
-    isPlayingMusic = !isPlayingMusic;
-})
-
-function initTimer(){
-    document.querySelector("#startFlocus").style.display = "none";
-    document.querySelector("#music").style.display = "block";
-    document.querySelector("audio").play();
-    document.querySelector("#pauseFlocus").style.display = "block";
-    document.querySelector("#stopFlocus").style.display = "block";
-    
-    document.querySelector("#minute").textContent = document.querySelector("#minuteInput").value;
-    document.querySelector("#second").textContent = document.querySelector("#secondInput").value;
-
-    const startTime = new Date();
-    const endTime = startCountDown(startTime);
-    let minute = parseInt(document.querySelector("#minute").textContent);
-    let second = parseInt(document.querySelector("#second").textContent);
-    document.querySelector('.circle .left .progress').style.transform = "rotate(" + ((1000 / (endTime - startTime)) * 360) + "deg)";
-    if (second === 0){
-        minute --;
-        second = 59;
-    } else {
-        second --;
-    }
-    document.querySelector("#minute").textContent = formatNumbers(minute);
-    document.querySelector("#second").textContent = formatNumbers(second);
-    const intervalId = updateTimer(startTime, endTime, 10);
-    countdownInstance.setIntervalID(intervalId);
-}
-
-document.querySelector("#startFlocus").addEventListener("click", initTimer)
-
-document.querySelector("#pauseFlocus").addEventListener("click", () => {
-    document.querySelector("#pauseFlocus").style.display = "none";
-    document.querySelector("#stopFlocus").style.display = "none";
-    document.querySelector("#music").style.display = "none";    
-    document.querySelector("#resumeFlocus").style.display = "block";  
-    pauseFlocus();    
-})
-
-function pauseFlocus(){
-    clearInterval(countdownInstance.getIntervalID());
-    document.querySelector("audio").pause();
-}
-
-function resumeFlocus(){
-    document.querySelector("audio").play();
-    const endTime = new Date();    
-    endTime.setMilliseconds(endTime.getMilliseconds() + countdownInstance.getMillisecondsLeft());
-    const startTime = endTime - countdownInstance.getSessionLength();
-    const intervalId = updateTimer(startTime, endTime, 10);
-    countdownInstance.setIntervalID(intervalId);
-}
-
-document.querySelector("#resumeFlocus").addEventListener("click", () => {
-    document.querySelector("#pauseFlocus").style.display = "block";
-    document.querySelector("#stopFlocus").style.display = "block";
-    document.querySelector("#music").style.display = "block";    
-    document.querySelector("#resumeFlocus").style.display = "none";        
-    resumeFlocus();
-})
-
-
 
 function startCountDown(startTime){
     const minute = document.querySelector("#minute").textContent;
@@ -118,7 +146,7 @@ function startCountDown(startTime){
     const endTime = new Date(startTime.getTime());
     endTime.setMinutes(endTime.getMinutes() + parseInt(minute));
     endTime.setSeconds(endTime.getSeconds() + parseInt(second));
-    countdownInstance.setSessionLength(endTime - startTime);
+    timerInstance.setSessionLength(endTime - startTime);
     return endTime;
 }
 
@@ -126,7 +154,7 @@ function updateTimer(startTime, endTime, ms){
     const intervalId = setInterval(function() {
         const current = new Date().getTime();
         const difference = endTime - current;
-        countdownInstance.setMillisecondsLeft(difference)
+        timerInstance.setMillisecondsLeft(difference)
         if (difference < 1) {
             clearInterval(intervalId);
             document.querySelector("#minute").textContent = formatNumbers(0);
@@ -139,24 +167,15 @@ function updateTimer(startTime, endTime, ms){
             updateProgressBar(startTime, endTime)
         }
 
-        if (difference < 1000){
+        if (difference <= 1000){
             clearInterval(intervalId);
-            const modalOfSessionEnd = new bootstrap.Modal(document.getElementById('sessionEnd'))
-            modalOfSessionEnd.show()
+            const modalOfSessionCompletion = new bootstrap.Modal(document.getElementById('completeSessionModal'))
+            modalOfSessionCompletion.show();
+            document.querySelector("audio").pause();
         }
     }, ms);
     return intervalId;
 }
-
-document.querySelector("#endSessionEarly").addEventListener("click", () => {
-    pauseFlocus();
-    const modalOfSessionEnd = new bootstrap.Modal(document.getElementById('sessionEndEarly'))
-    modalOfSessionEnd.show()
-})
-
-document.querySelectorAll('.closeModalOfSessionEndEarly').forEach(element => element.addEventListener('click', () => {
-    resumeFlocus();
-}))
 
 function formatNumbers(num){
     const numInStringForm = num.toString()
@@ -171,7 +190,6 @@ function updateProgressBar(startTime, endTime){
     const current = new Date().getTime();
     const msPassed = current - startTime;
     const progress = (msPassed + 1000) / sessionLengthInMs;
-    // countdownInstance.setProgress(progress);
     if (progress < 0.5){
         const degree = progress * 360;
         document.querySelector('.circle .left .progress').style.transform = "rotate(" + degree + "deg)";
@@ -191,9 +209,3 @@ function assumeStartTime(progress, sessionLengthInMs){
     const msPassed = sessionLengthInMs * progress;
     return current - msPassed;
 }
-
-document.querySelector("#timeSetting").addEventListener('keydown', (event) => {
-    if (event.key === "Enter"){
-        initTimer();
-    }
-});

@@ -37,13 +37,13 @@
   <div id="pageBody">
     <div class="container h-100" id="mainContainer">
       <div class="d-flex justify-content-center align-items-center">
-        <div class="my-3">
+        <div class="my-3" id="task">
           <select id="selectExistingTasks" class="form-select">
-            <option selected disabled>Select existing tasks</option>
-            <option value="Sample Task 1">Sample Task 1</option>
-            <option value="Sample Task 2">Sample Task 2</option>
-            <option value="Sample Task 3">Sample Task 3</option>
-            <option value="Sample Task 4">Sample Task 4</option>
+            <option selected disabled value="">Select existing tasks</option>
+            <option value="COMM1116 Assignment">COMM1116 Assignment</option>
+            <option value="COMP1113 Quiz">COMP1113 Quiz</option>
+            <option value="COMP1712 Assignment #7">COMP1712 Assignment #7</option>
+            <option value="COMP1510 Assignment #2">COMP1510 Assignment #2</option>
           </select>
         </div>
       </div>
@@ -105,8 +105,8 @@
                   <span>Stop</span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#" id="endSessionEarly">End and Save</a></li>
-                  <li><a class="dropdown-item" href="#">Quit</a></li>
+                  <li><a class="dropdown-item pauseCountDown" href="#" id="endSession" data-bs-toggle="modal" data-bs-target="#endSessionModal">End and Save</a></li>
+                  <li><a class="dropdown-item pauseCountDown" href="#" id="quitSession" data-bs-toggle="modal" data-bs-target="#quitSessionModal">Quit</a></li>
                 </ul>
               </div>
             </div>
@@ -135,18 +135,43 @@
   </audio>
 
   <!-- Modal -->
-  <div class="modal fade" id="sessionEnd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="completeSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Task completed?</h5>
         </div>
         <div class="modal-body d-flex justify-content-around">
-          <button type="button" class="btn btn-success" id="taskCompleted">
-            Yes
-          </button>
-          <button type="button" class="btn btn-danger" id="taskNotCompleted">
+          <a href="statics.html">
+            <button type="button" class="btn btn-success" id="taskCompleted">
+              Yes
+            </button>
+          </a>
+          <a href="home.html">
+            <button type="button" class="btn btn-danger" id="taskNotCompleted">
+              No
+            </button>   
+          </a> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="endSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Task completed?</h5>
+          <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-around">
+          <a href="statics.html">
+            <button type="button" class="btn btn-success" id="confirmedEndSessionEarly">
+              Yes
+            </button>
+          </a>
+          <button type="button" class="btn btn-danger resumeCountDown" data-bs-dismiss="modal" aria-label="Close">
             No
           </button>    
         </div>
@@ -154,26 +179,27 @@
     </div>
   </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="sessionEndEarly" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Task completed?</h5>
-          <button type="button" class="btn-close closeModalOfSessionEndEarly" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body d-flex justify-content-around">
-          <button type="button" class="btn btn-success" id="confirmedEndSessionEarly">
-            Yes
-          </button>
-          <button type="button" class="btn btn-danger closeModalOfSessionEndEarly" data-bs-dismiss="modal" aria-label="Close">
-            No
-          </button>    
-        </div>
+  <!-- Modal -->
+<div class="modal fade" id="quitSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm to quit this session?</h5>
+        <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <div class="modal-body d-flex justify-content-around">
+        <a href="home.html">
+          <button type="button" class="btn btn-primary">Yes</button>
+        </a>
+        <button type="button" class="btn btn-secondary resumeCountDown" data-bs-dismiss="modal">Cancel</button>        
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div> -->
     </div>
   </div>
+</div>
   <!--------------------------------------------------->
   <!-- Your Javascript Libraries and scripts go here -->
   <!--------------------------------------------------->
