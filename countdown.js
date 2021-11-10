@@ -153,6 +153,10 @@ function updateProgressBar(startTime, endTime){
         const degree = Math.min((progress - 0.5) * 360, 180);
         document.querySelector('.circle .right .progress').style.transform = "rotate(" + degree + "deg)";
     }
+
+    if(sessionLengthInMs - msPassed <= 6000){
+        document.querySelectorAll('.circle .bar .progress').forEach(element => element.style.background = "red")
+    }
 }
 
 function assumeStartTime(progress, sessionLengthInMs){

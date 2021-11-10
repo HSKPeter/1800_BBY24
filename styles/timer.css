@@ -24,8 +24,8 @@
 }
 
 #countdownClock {
-  height: 240px;
-  width: 240px;
+  height: 260px;
+  width: 260px;
 }
 
 .circular {
@@ -63,7 +63,7 @@
   width: 100%;
   background: #eee;
   border-radius: 100%;
-  clip: rect(0px, 240px, 240px, 120px);
+  clip: rect(0px, 260px, 260px, 130px);
 }
 
 .circle .bar .progress {
@@ -71,7 +71,7 @@
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  clip: rect(0px, 120px, 240px, 0px);
+  clip: rect(0px, 130px, 260px, 0px);
   background: rgb(255, 179, 0);
   ;
 }
@@ -100,6 +100,7 @@
 
 #minuteInput, #secondInput {
   display: inline;
+  text-align: center; 
   width: 44px;
   padding: 0;
 }
