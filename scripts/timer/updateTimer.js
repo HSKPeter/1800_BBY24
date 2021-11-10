@@ -19,7 +19,8 @@ function updateTimer(startTime, endTime, ms){
             clearInterval(intervalId);
             const modalOfSessionCompletion = new bootstrap.Modal(document.getElementById('completeSessionModal'))
             modalOfSessionCompletion.show();
-            document.querySelector("audio").pause();
+            document.querySelector("#backgroundMusic").pause();
+            document.querySelector("#notification").play();
         }
     }, ms);
     return intervalId;

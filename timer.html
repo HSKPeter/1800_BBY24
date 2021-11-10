@@ -130,8 +130,13 @@
       <i class="material-icons text-white">bar_chart</i>
     </div>
   </footer>
-  <audio>
-    <source src="flocus-music.m4a">
+
+  <audio id="backgroundMusic">
+    <source src="audio/flocus-music.m4a">
+  </audio>
+
+  <audio id="notification" loop>
+    <source src="audio/notification.m4a">
   </audio>
 
   <!-- Modal -->
@@ -143,12 +148,12 @@
         </div>
         <div class="modal-body d-flex justify-content-around">
           <a href="statics.html">
-            <button type="button" class="btn btn-success" id="taskCompleted">
+            <button type="button" class="btn btn-success updateTaskProgress" id="taskCompleted">
               Yes
             </button>
           </a>
           <a href="home.html">
-            <button type="button" class="btn btn-danger" id="taskNotCompleted">
+            <button type="button" class="btn btn-danger updateTaskProgress" id="taskNotCompleted">
               No
             </button>   
           </a> 
@@ -200,6 +205,8 @@
     </div>
   </div>
 </div>
+
+
   <!--------------------------------------------------->
   <!-- Your Javascript Libraries and scripts go here -->
   <!--------------------------------------------------->

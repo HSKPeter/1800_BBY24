@@ -47,7 +47,7 @@ class Timer {
         `;
         document.querySelector("#startFlocus").style.display = "none";
         document.querySelector("#music").style.display = "block";
-        document.querySelector("audio").play();
+        document.querySelector("#backgroundMusic").play();
         document.querySelector("#pauseFlocus").style.display = "block";
         document.querySelector("#stopFlocus").style.display = "block";
         
@@ -77,12 +77,12 @@ class Timer {
         document.querySelector("#music").style.display = "none";    
         document.querySelector("#resumeFlocus").style.display = "block";  
         clearInterval(this.#intervalID);
-        document.querySelector("audio").pause();
+        document.querySelector("#backgroundMusic").pause();
     }
 
     stop(){
         clearInterval(this.#intervalID);
-        document.querySelector("audio").pause();
+        document.querySelector("#backgroundMusic").pause();
     }
 
     resume(){
@@ -91,7 +91,7 @@ class Timer {
         document.querySelector("#music").style.display = "block";    
         document.querySelector("#resumeFlocus").style.display = "none";  
 
-        document.querySelector("audio").play();
+        document.querySelector("#backgroundMusic").play();
         
         const endTime = new Date();    
         endTime.setMilliseconds(endTime.getMilliseconds() + timerInstance.getMillisecondsLeft());
@@ -112,7 +112,6 @@ class Timer {
         }
         this.#isPlayingMusic = !this.#isPlayingMusic;
     }
-
 }
 
 const timerInstance = new Timer();
@@ -139,6 +138,9 @@ document.querySelectorAll("input").forEach(inputField => inputField.addEventList
     inputField.value = formatNumbers(inputField.value);
 }))
 
+document.querySelectorAll(".updateTaskProgress").forEach(inputField => inputField.addEventListener("click", () => {
+    document.querySelectorAll("#notification").pause();
+}))
 
 
 
