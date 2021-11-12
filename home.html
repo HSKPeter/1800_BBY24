@@ -19,14 +19,22 @@
     <!-- Custom list home page css -->
     <link href="home.css" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+
+    <!-- Script for pop-up task information-->
+    <script type="module" src="scripts/home/pop_up.js"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
   </head>
   
   <body>
     <!-- Top navbar -->
-    <nav class="navbar navbar-light bg-secondary mb-3">
+    <nav class="navbar navbar-light bg-primary mb-3">
       <div class="container py-2">
         <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
-        <i class="material-icons text-white">settings</i>
+        <a href="settings.html"><i class="material-icons text-white">settings</i></a>
       </div>
     </nav>
   
@@ -63,7 +71,7 @@
                 <button class="btn btn-dark dropdown-toggle" type="button" id="drop-down-length" data-bs-toggle="dropdown" aria-expanded="false">
                   Length of Task
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <ul class="dropdown-menu dropdown-menu-info" aria-labelledby="dropdownMenuButton2">
                   <li><a class="dropdown-item active" href="#">Very-Short</a></li>
                   <li><a class="dropdown-item" href="#">Short</a></li>
                   <li><a class="dropdown-item" href="#">Medium</a></li>
@@ -83,8 +91,9 @@
           </div>
         </div>
         <div id="overlay"></div>
-  
 
+
+      <!--- Home Page-->
       <h1>Welcome John Smith!</h1>
 
       <!-- Tasks -->
@@ -107,17 +116,17 @@
       <!-- Buttons -->
       <div class="d-grid mx-auto">
 
-        <button data-pop-up-target="#pop-up" id="new-task-button" class="btn btn-warning btn-lg" type="button">New Task</button>
+        <button data-pop-up-target="#pop-up" id="new-task-button" class="btn btn-info btn-lg" type="button">New Task</button>
 
-        <button id="edit-task-button" class="btn btn-warning btn-lg" type="button">Edit Task</button>
+        <button id="edit-task-button" class="btn btn-info btn-lg" type="button">Edit Task</button>
 
       </div>
-
+      
 
       <!-- Quote -->
       <br/><br>
       <figure class="text-center">
-        <blockquote class="blockquote">
+        <blockquote class="blockquote"> <!-- This needs to be DOM which grabs a new quote every hour (or maybe every time the page is loaded)-->
           <p>Don't focus on the pain, focus on the progress.</p>
         </blockquote>
         <figcaption class="blockquote-footer">
@@ -128,11 +137,11 @@
     </div>
   
     <!-- Bottom navbar -->
-    <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
+    <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
       <div class="container py-2 mx-5">
-        <i class="material-icons text-white">timer</i>
+        <a href="timer.html"><i class="material-icons text-white">timer</i></a>
         <a href="home.html"><i class="material-icons text-white">list</i></a>
-        <i class="material-icons text-white">bar_chart</i>
+        <a href="statics.html"><i class="material-icons text-white">bar_chart</i></a>
       </div>
     </footer>
 
@@ -141,13 +150,18 @@
     <!-- Your Javascript Libraries and scripts go here -->
     <!--------------------------------------------------->
 
-    <!-- Script for pop-up task information-->
-    <script src="pop_up.js"></script>
-  
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"></script>
+
+    <script>
+        document.getElementById("finish-task-settings").addEventListener("click", function(e) {
+          const ref = db.ref("Quotes");
+              const task = {
+                  quote: "An apple a day keeps the doctors away",
+                  author: "unknown"
+              }
+          ref.push();
+          console.log("Added a test quote to firebase!");
+        });
+    </script>
 
   </body>
 </html>
