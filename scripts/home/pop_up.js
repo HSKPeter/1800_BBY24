@@ -1,4 +1,5 @@
-// used as a test to ensure the page is linked up to this file
+
+// test to see if it is working
 console.log("Hello World!");
 
 // Define all query selectors
@@ -22,7 +23,6 @@ overlay.addEventListener('click', () => {
   });
 });
 
-
 closePopUpButtons.forEach(button => {
   button.addEventListener('click', () => {
     const popUp = button.closest('.pop-up');
@@ -30,7 +30,7 @@ closePopUpButtons.forEach(button => {
   });
 });
 
-openPopUp = function(popUp) {
+function openPopUp(popUp) {
   if (popUp == null) {
     return;
   }
@@ -39,7 +39,7 @@ openPopUp = function(popUp) {
   overlay.classList.add('active');
 }
 
-closePopUp = function(popUp) {
+function closePopUp(popUp) {
   if (popUp == null) {
     return;
   }
