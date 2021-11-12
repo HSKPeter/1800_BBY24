@@ -43,11 +43,44 @@
     <div class="px-4 py-5 my-5 text-center">
         <h1 class="display-5 fw-bold">Settings</h1>
         <br>
-        <a href="help.html"><button type="button" class="btn btn-secondary btn-lg text-nowrap">Help</button></a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Help
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>CLick on list button to create a new task</li>
+                            <li>Click on timer button to set the timer</li>
+                            <li>Click on graph button to view task progress</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <br>
         <br>
-        <button type="button" class="btn btn-secondary btn-lg text-nowrap">Change color theme</button>
-        <br>
+        <div class="dropdown">
+            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Change colour theme
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Light mode</a></li>
+                <li><a class="dropdown-item" href="#">Dark mode</a></li>
+            </ul>
+        </div>
         <br>
         <button type="button" class="btn btn-secondary btn-lg text-nowrap">History of tasks</button>
         <br>
@@ -56,6 +89,29 @@
         <br>
         <br>
         <button type="button" class="btn btn-secondary btn-lg text-nowrap">Reset to default</button>
+        <br>
+        <br>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+            Logout
+        </button>
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="container">
