@@ -90,7 +90,7 @@
   transform: rotate(0deg);
 }
 
-#pauseFlocus, #stopFlocus, #resumeFlocus, #music {
+#startFlocus, #pauseFlocus, #stopFlocus, #resumeFlocus, #music, #timeSetting, #selectExistingTasks {
   display: none;
 }
 
