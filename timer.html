@@ -19,6 +19,13 @@
   <!-- Google Icons (Material Design)-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="styles/timer.css">
+
+  <!-- Firebase 8 CDNs-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>   -->
 </head>
 
 <body>
@@ -61,7 +68,7 @@
                     <input type="number" class="form-control" placeholder="MM" value="25" min="0" max="99"
                       id="minuteInput">
                   </span>
-  
+
                   <span>:</span>
                   <span id="second">
                     <input type="number" class="form-control" placeholder="ss" value="00" min="00" max="59"
@@ -107,8 +114,10 @@
                   <span>Stop</span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item pauseCountDown" href="#" id="endSession" data-bs-toggle="modal" data-bs-target="#endSessionModal">End and Save</a></li>
-                  <li><a class="dropdown-item pauseCountDown" href="#" id="quitSession" data-bs-toggle="modal" data-bs-target="#quitSessionModal">Quit</a></li>
+                  <li><a class="dropdown-item pauseCountDown" href="#" id="endSession" data-bs-toggle="modal"
+                      data-bs-target="#endSessionModal">End and Save</a></li>
+                  <li><a class="dropdown-item pauseCountDown" href="#" id="quitSession" data-bs-toggle="modal"
+                      data-bs-target="#quitSessionModal">Quit</a></li>
                 </ul>
               </div>
             </div>
@@ -148,7 +157,8 @@
   </audio>
 
   <!-- Modal -->
-  <div class="modal fade" id="completeSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="completeSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -163,15 +173,16 @@
           <a href="home.html">
             <button type="button" class="btn btn-danger updateTaskProgress" id="taskNotCompleted">
               No
-            </button>   
-          </a> 
+            </button>
+          </a>
         </div>
       </div>
     </div>
   </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="endSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <!-- Modal -->
+  <div class="modal fade" id="endSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -186,33 +197,34 @@
           </a>
           <button type="button" class="btn btn-danger resumeCountDown" data-bs-dismiss="modal" aria-label="Close">
             No
-          </button>    
+          </button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="quitSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Confirm to quit this session?</h5>
-        <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body d-flex justify-content-around">
-        <a href="home.html">
-          <button type="button" class="btn btn-primary">Yes</button>
-        </a>
-        <button type="button" class="btn btn-secondary resumeCountDown" data-bs-dismiss="modal">Cancel</button>        
-      </div>
-      <!-- <div class="modal-footer">
+  <div class="modal fade" id="quitSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm to quit this session?</h5>
+          <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-around">
+          <a href="home.html">
+            <button type="button" class="btn btn-primary">Yes</button>
+          </a>
+          <button type="button" class="btn btn-secondary resumeCountDown" data-bs-dismiss="modal">Cancel</button>
+        </div>
+        <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Understood</button>
       </div> -->
+      </div>
     </div>
   </div>
-</div>
 
 
   <!--------------------------------------------------->
