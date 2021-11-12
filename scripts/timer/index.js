@@ -189,7 +189,13 @@ document.querySelectorAll(".updateTaskProgress").forEach(inputField => inputFiel
     document.querySelectorAll("#notification").pause();
 }))
 
+document.querySelector("#confirmedQuitSession").addEventListener('click', () => {
+    deactivateSessionInFirebase()
+})
 
-
+document.querySelector("#confirmedEndSessionEarly").addEventListener('click', () => {
+    setMsInFirebase(0);
+    updateTaskCompletionStatus(true);
+})
 
 

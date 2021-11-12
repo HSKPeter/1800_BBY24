@@ -27,6 +27,13 @@ function deactivateSessionInFirebase() {
     });
 }
 
+function updateTaskCompletionStatus(status){
+    currentUser.update({
+        taskCompleted: status,
+        isActive: false
+    });
+}
+
 async function getSessionStatusFromFirebase(){
     const doc = await currentUser.get();
     const sessionDetails = doc.data()

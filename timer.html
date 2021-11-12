@@ -116,8 +116,8 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item pauseCountDown" href="#" id="endSession" data-bs-toggle="modal"
-                      data-bs-target="#endSessionModal">End and Save</a></li>
-                  <li><a class="dropdown-item pauseCountDown" href="#" id="quitSession" data-bs-toggle="modal"
+                      data-bs-target="#endSessionModal">Complete and Save</a></li>
+                  <li><a class="dropdown-item pauseCountDown" href="timer.html" id="quitSession" data-bs-toggle="modal"
                       data-bs-target="#quitSessionModal">Quit</a></li>
                 </ul>
               </div>
@@ -215,7 +215,7 @@
         </div>
         <div class="modal-body d-flex justify-content-around">
           <a href="home.html">
-            <button type="button" class="btn btn-primary">Yes</button>
+            <button type="button" class="btn btn-primary" id="confirmedQuitSession">Yes</button>
           </a>
           <button type="button" class="btn btn-secondary resumeCountDown" data-bs-dismiss="modal">Cancel</button>
         </div>
