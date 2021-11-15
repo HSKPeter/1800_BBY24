@@ -18,7 +18,6 @@ function updateTimer(startTime, endTime, ms){
 
         if (difference <= 1000){
             clearInterval(intervalId);
-            deactivateSessionInFirebase();
             const modalOfSessionCompletion = new bootstrap.Modal(document.getElementById('completeSessionModal'))
             modalOfSessionCompletion.show();
             document.querySelector("#backgroundMusic").pause();

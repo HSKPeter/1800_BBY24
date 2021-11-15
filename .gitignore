@@ -1,2 +1,6 @@
 .DS_Store
+<<<<<<< HEAD
+=======
+scripts/firebase_API.js
+>>>>>>> bc6065d2e1f21436b323cb3df70d41c8d807f238
 scripts/apiKey.js

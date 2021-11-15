@@ -50,10 +50,6 @@
         <div class="my-3" id="task">
           <select id="selectExistingTasks" class="form-select">
             <option selected disabled value="">Select existing tasks</option>
-            <option value="COMM1116 Assignment">COMM1116 Assignment</option>
-            <option value="COMP1113 Quiz">COMP1113 Quiz</option>
-            <option value="COMP1712 Assignment #7">COMP1712 Assignment #7</option>
-            <option value="COMP1510 Assignment #2">COMP1510 Assignment #2</option>
           </select>
         </div>
       </div>
@@ -116,8 +112,8 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item pauseCountDown" href="#" id="endSession" data-bs-toggle="modal"
-                      data-bs-target="#endSessionModal">End and Save</a></li>
-                  <li><a class="dropdown-item pauseCountDown" href="#" id="quitSession" data-bs-toggle="modal"
+                      data-bs-target="#endSessionModal">Complete and Save</a></li>
+                  <li><a class="dropdown-item pauseCountDown" href="timer.html" id="quitSession" data-bs-toggle="modal"
                       data-bs-target="#quitSessionModal">Quit</a></li>
                 </ul>
               </div>
@@ -166,16 +162,16 @@
           <h5 class="modal-title">Task completed?</h5>
         </div>
         <div class="modal-body d-flex justify-content-around">
-          <a href="statics.html">
+          <!-- <a href="statics.html"> -->
             <button type="button" class="btn btn-success updateTaskProgress" id="taskCompleted">
               Yes
             </button>
-          </a>
-          <a href="home.html">
+          <!-- </a> -->
+          <!-- <a href="home.html"> -->
             <button type="button" class="btn btn-danger updateTaskProgress" id="taskNotCompleted">
               No
             </button>
-          </a>
+          <!-- </a> -->
         </div>
       </div>
     </div>
@@ -191,11 +187,11 @@
           <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-around">
-          <a href="statics.html">
+          <!-- <a href="statics.html"> -->
             <button type="button" class="btn btn-success" id="confirmedEndSessionEarly">
               Yes
             </button>
-          </a>
+          <!-- </a> -->
           <button type="button" class="btn btn-danger resumeCountDown" data-bs-dismiss="modal" aria-label="Close">
             No
           </button>
@@ -214,9 +210,9 @@
           <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-around">
-          <a href="home.html">
-            <button type="button" class="btn btn-primary">Yes</button>
-          </a>
+          <!-- <a href="home.html"> -->
+            <button type="button" class="btn btn-primary" id="confirmedQuitSession">Yes</button>
+          <!-- </a> -->
           <button type="button" class="btn btn-secondary resumeCountDown" data-bs-dismiss="modal">Cancel</button>
         </div>
         <!-- <div class="modal-footer">
