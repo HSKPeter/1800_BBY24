@@ -24,14 +24,15 @@ p {
   font-size: 3vw;
 }
 
-.task-container {
+#task-container {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 1fr, 1fr, 1fr;
   margin: 5%;
   padding: 1%;
-  background-color: gray;
-  color: black;
+  background-color: lightgray;
+  border-style: solid;
+  border-color: black;
   border-width: 2%;
   overflow-y: scroll;
 }
@@ -139,4 +140,9 @@ input {
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.6);
   opacity: 1;
+}
+
+form {
+  width: 100vw;
+  margin-left: 25%;
 }

@@ -27,11 +27,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <script src="scripts/apiKey.js"></script>
+
   </head>
   
   <body>
     <!-- Top navbar -->
-    <nav class="navbar navbar-light bg-primary mb-3">
+    <nav class="navbar navbar-light bg-secondary mb-3">
       <div class="container py-2">
         <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
         <a href="settings.html"><i class="material-icons text-white">settings</i></a>
@@ -47,43 +55,46 @@
             <div class="title">Please fill in the information</div>
           </div>
           <div class="pop-up-body">
+
             <!-- Task Name field -->
             <input type="text" class="form-control" id="task-name" placeholder="Task Name">
   
             <!-- Due Date-->
-            <input class="form-control" id="due-date" placeholder="Task Due Date">
+            <input type="date" id="task-due-date">
+
+            <!-- Task Status -->
             <div class="task-status" id="status">   
               <div class="dropdown">
                 <button class="btn btn-dark dropdown-toggle" type="button" id="due-date-button" data-bs-toggle="dropdown" aria-expanded="false">
                   Task Status
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="drop-down-due-date">
-                  <li><a class="dropdown-item active" href="#">Not-Started</a></li>
-                  <li><a class="dropdown-item" href="#">In-Progress</a></li>
-                  <li><a class="dropdown-item" href="#">Done</a></li>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="drop-down-due-date" id="status-dropdown-buttons">
+                  <li onclick="toggleClickedButton(this)"><a class="dropdown-item active" href="#">Not-Started</a></li>
+                  <li onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">In-Progress</a></li>
+                  <li onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Done</a></li>
                 </ul>
               </div>
             </div>
 
             <!-- Task Length -->
             <div class="task-info" id="task-info-container">
-              <div class="dropdown">
+              <div class="dropdown" id="task-length">
                 <button class="btn btn-dark dropdown-toggle" type="button" id="drop-down-length" data-bs-toggle="dropdown" aria-expanded="false">
                   Length of Task
                 </button>
-                <ul class="dropdown-menu dropdown-menu-info" aria-labelledby="dropdownMenuButton2">
-                  <li><a class="dropdown-item active" href="#">Very-Short</a></li>
-                  <li><a class="dropdown-item" href="#">Short</a></li>
-                  <li><a class="dropdown-item" href="#">Medium</a></li>
-                  <li><a class="dropdown-item" href="#">Large</a></li>
-                  <li><a class="dropdown-item" href="#">Very-Large</a></li>
+                <ul class="dropdown-menu dropdown-menu-dark" id="length-dropdown-buttons" aria-labelledby="dropdownMenuButton2">
+                  <li id="length-drop-down-b1" onclick="toggleClickedButton(this)"><a class="dropdown-item active" href="#">Very-Short</a></li>
+                  <li id="length-drop-down-b2" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Short</a></li>
+                  <li id="length-drop-down-b3" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Medium</a></li>
+                  <li id="length-drop-down-b4" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Large</a></li>
+                  <li id="length-drop-down-b5" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Very-Large</a></li>
                 </ul>
               </div>
             </div>
+
             <!-- Ok -->
-            <div id="task-length" class="task-info">
-              <button id="finish-task-settings" class="btn btn-dark" type="button">Ok</button>
-            </div>
+            <button id="finish-task-settings" class="btn btn-dark" type="button" onclick="logNewTaskData()">Ok</button>
+
             <!-- Cancel -->
             <div class="task-info">
               <button data-close-button class="btn btn-light cancel-button" type="button">Cancel</button>
@@ -94,31 +105,18 @@
 
 
       <!--- Home Page-->
-      <h1>Welcome John Smith!</h1>
+      <h1>Welcome <span id="user-name"></span></h1>
 
       <!-- Tasks -->
-      <div class="task-container">
-
-        <div class="task">
-          <h2>Web Dev Assignment 3</h2>
-          <p>Length: Medium</p>
-        </div>
-        <div class="task">
-          <h2>Math Quiz</h2>
-          <p>Length: Short</p>
-        </div>
-        <div class="task">
-          <h2>Java Lab 5</h2>
-          <p>Length: Medium</p>
-        </div>
+      <div id="task-container">
       </div>
 
       <!-- Buttons -->
       <div class="d-grid mx-auto">
 
-        <button data-pop-up-target="#pop-up" id="new-task-button" class="btn btn-info btn-lg" type="button">New Task</button>
+        <button data-pop-up-target="#pop-up" id="new-task-button" class="btn btn-secondary btn-lg" type="button">New Task</button>
 
-        <button id="edit-task-button" class="btn btn-info btn-lg" type="button">Edit Task</button>
+        <button id="edit-task-button" class="btn btn-secondary btn-lg" type="button">Edit Task</button>
 
       </div>
       
@@ -126,18 +124,18 @@
       <!-- Quote -->
       <br/><br>
       <figure class="text-center">
-        <blockquote class="blockquote"> <!-- This needs to be DOM which grabs a new quote every hour (or maybe every time the page is loaded)-->
-          <p>Don't focus on the pain, focus on the progress.</p>
+        <blockquote class="blockquote" id="quote"> <!-- This needs to be DOM which grabs a new quote every hour (or maybe every time the page is loaded)-->
+
         </blockquote>
-        <figcaption class="blockquote-footer">
-          Dwayne Johnson
+        <figcaption class="blockquote-footer" id="quote-author">
+          
         </figcaption>
       </figure>
       <br/><br/><br/>
     </div>
   
     <!-- Bottom navbar -->
-    <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
+    <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
       <div class="container py-2 mx-5">
         <a href="timer.html"><i class="material-icons text-white">timer</i></a>
         <a href="home.html"><i class="material-icons text-white">list</i></a>
@@ -149,19 +147,8 @@
     <!--------------------------------------------------->
     <!-- Your Javascript Libraries and scripts go here -->
     <!--------------------------------------------------->
-
-
-    <script>
-        document.getElementById("finish-task-settings").addEventListener("click", function(e) {
-          const ref = db.ref("Quotes");
-              const task = {
-                  quote: "An apple a day keeps the doctors away",
-                  author: "unknown"
-              }
-          ref.push();
-          console.log("Added a test quote to firebase!");
-        });
-    </script>
+    <script src="scripts/home/taskSetup.js"></script> 
+    <script src="scripts/home/homeText.js"></script>
 
   </body>
 </html>
