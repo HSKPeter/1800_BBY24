@@ -2,249 +2,240 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>Flocus</title>
-  <meta name="Flocus" content="timer">
+    <meta charset="utf-8">
+    <title>Flocus</title>
+    <meta name="Flocus" content="timer">
 
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 
 
-  <!-- Google Icons (Material Design)-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="styles/timer.css">
+    <!-- Google Icons (Material Design)-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles/timer.css">
 
-  <!-- Firebase 8 CDNs-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <!-- <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>   -->
-  <script src="scripts/apiKey.js"></script>
+    <!-- Firebase 8 CDNs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>   -->
+    <script src="scripts/apiKey.js"></script>
 </head>
 
 <body>
 
-  <!------------------------------------>
-  <!-- Your own HTML layout goes here -->
-  <!------------------------------------>
+    <!------------------------------------>
+    <!-- Your own HTML layout goes here -->
+    <!------------------------------------>
 
-  <nav class="navbar navbar-light bg-secondary">
-    <div class="container py-2">
-      <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
-      <a href="settings.html">
-        <i class="material-icons text-white">settings</i>
-      </a>
-    </div>
-  </nav>
+    <nav class="navbar navbar-light bg-secondary">
+        <div class="container py-2">
+            <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
+            <a href="settings.html">
+                <i class="material-icons text-white">settings</i>
+            </a>
+        </div>
+    </nav>
 
-  <div id="pageBody">
-    <div class="container h-100" id="mainContainer">
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="my-3" id="task">
-          <select id="selectExistingTasks" class="form-select">
+    <div id="pageBody">
+        <div class="container h-100" id="mainContainer">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="my-3" id="task">
+                    <select id="selectExistingTasks" class="form-select">
             <option selected disabled value="">Select existing tasks</option>
             <option value="COMM1116 Assignment">COMM1116 Assignment</option>
             <option value="COMP1113 Quiz">COMP1113 Quiz</option>
             <option value="COMP1712 Assignment #7">COMP1712 Assignment #7</option>
             <option value="COMP1510 Assignment #2">COMP1510 Assignment #2</option>
           </select>
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <div id="countdownClockContainer">
-        <div class="d-flex justify-content-center align-items-center">
-          <div id="countdownClock">
-            <div class="circular">
-              <div class="inner"></div>
-              <div class="time">
-                <form id="timeSetting">
-                  <span id="minute">
+            <div id="countdownClockContainer">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div id="countdownClock">
+                        <div class="circular">
+                            <div class="inner"></div>
+                            <div class="time">
+                                <form id="timeSetting">
+                                    <span id="minute">
                     <input type="number" class="form-control" placeholder="MM" value="25" min="0" max="99"
                       id="minuteInput">
                   </span>
 
-                  <span>:</span>
-                  <span id="second">
+                                    <span>:</span>
+                                    <span id="second">
                     <input type="number" class="form-control" placeholder="ss" value="00" min="00" max="59"
                       id="secondInput">
                   </span>
-                </form>
-              </div>
-              <div class="circle">
-                <div class="bar left">
-                  <div class="progress"></div>
+                                </form>
+                            </div>
+                            <div class="circle">
+                                <div class="bar left">
+                                    <div class="progress"></div>
+                                </div>
+                                <div class="bar right">
+                                    <div class="progress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bar right">
-                  <div class="progress"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="d-flex justify-content-center align-items-center flex-column">
-          <div class="d-flex justify-content-center align-items-center flex-column" id="controlButtons">
-            <div>
-              <button class="btn btn-secondary" type="button" id="startFlocus">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <div class="d-flex justify-content-center align-items-center flex-column" id="controlButtons">
+                        <div>
+                            <button class="btn btn-secondary" type="button" id="startFlocus">
                 <i class="bi bi-play-fill"></i>
                 <span>Start Flocus</span>
               </button>
-            </div>
-            <div>
-              <button class="btn btn-secondary" type="button" id="resumeFlocus">
+                        </div>
+                        <div>
+                            <button class="btn btn-secondary" type="button" id="resumeFlocus">
                 <i class="bi bi-play-fill"></i>
                 <span>Resume Flocus</span>
               </button>
-            </div>
-            <div class="w-100 d-flex justify-content-around align-items-center">
-              <button class="btn btn-secondary" type="button" id="pauseFlocus">
+                        </div>
+                        <div class="w-100 d-flex justify-content-around align-items-center">
+                            <button class="btn btn-secondary" type="button" id="pauseFlocus">
                 <i class="bi bi-pause-fill"></i>
                 <span>Pause</span>
               </button>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="stopFlocus"
-                  data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="stopFlocus" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="bi bi-stop-fill"></i>
                   <span>Stop</span>
                 </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item pauseCountDown" href="#" id="endSession" data-bs-toggle="modal"
-                      data-bs-target="#endSessionModal">Complete and Save</a></li>
-                  <li><a class="dropdown-item pauseCountDown" href="timer.html" id="quitSession" data-bs-toggle="modal"
-                      data-bs-target="#quitSessionModal">Quit</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="mt-4">
-            <button class="btn btn-secondary" type="button" id="music" data-music="on">
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item pauseCountDown" href="#" id="endSession" data-bs-toggle="modal" data-bs-target="#endSessionModal">Complete and Save</a></li>
+                                    <li><a class="dropdown-item pauseCountDown" href="timer.html" id="quitSession" data-bs-toggle="modal" data-bs-target="#quitSessionModal">Quit</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-secondary" type="button" id="music" data-music="on">
               <i class="bi bi-volume-up-fill"></i>
             </button>
-          </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-      </div>
     </div>
-  </div>
 
 
-  <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
-    <div class="container py-2 mx-5">
-      <a href="timer.html">
-        <i class="material-icons text-white">timer</i>
-      </a>
-      <a href="home.html">
-        <i class="material-icons text-white">list</i>
-      </a>
-      <a href="statics.html">
-        <i class="material-icons text-white">bar_chart</i>
-      </a>
-    </div>
-  </footer>
+    <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
+        <div class="container py-2 mx-5">
+            <a href="timer.html">
+                <i class="material-icons text-white">timer</i>
+            </a>
+            <a href="home.html">
+                <i class="material-icons text-white">list</i>
+            </a>
+            <a href="statics.html">
+                <i class="material-icons text-white">bar_chart</i>
+            </a>
+        </div>
+    </footer>
 
-  <audio id="backgroundMusic">
+    <audio id="backgroundMusic">
     <source src="audio/flocus-music.m4a">
   </audio>
 
-  <audio id="notification" loop>
+    <audio id="notification" loop>
     <source src="audio/notification.m4a">
   </audio>
 
-  <!-- Modal -->
-  <div class="modal fade" id="completeSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Task completed?</h5>
-        </div>
-        <div class="modal-body d-flex justify-content-around">
-          <a href="statics.html">
-            <button type="button" class="btn btn-success updateTaskProgress" id="taskCompleted">
+    <!-- Modal -->
+    <div class="modal fade" id="completeSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Task completed?</h5>
+                </div>
+                <div class="modal-body d-flex justify-content-around">
+                    <a href="statics.html">
+                        <button type="button" class="btn btn-success updateTaskProgress" id="taskCompleted">
               Yes
             </button>
-          </a>
-          <a href="home.html">
-            <button type="button" class="btn btn-danger updateTaskProgress" id="taskNotCompleted">
+                    </a>
+                    <a href="home.html">
+                        <button type="button" class="btn btn-danger updateTaskProgress" id="taskNotCompleted">
               No
             </button>
-          </a>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="endSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Task completed?</h5>
-          <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body d-flex justify-content-around">
-          <a href="statics.html">
-            <button type="button" class="btn btn-success" id="confirmedEndSessionEarly">
+    <!-- Modal -->
+    <div class="modal fade" id="endSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Task completed?</h5>
+                    <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-around">
+                    <a href="statics.html">
+                        <button type="button" class="btn btn-success" id="confirmedEndSessionEarly">
               Yes
             </button>
-          </a>
-          <button type="button" class="btn btn-danger resumeCountDown" data-bs-dismiss="modal" aria-label="Close">
+                    </a>
+                    <button type="button" class="btn btn-danger resumeCountDown" data-bs-dismiss="modal" aria-label="Close">
             No
           </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="quitSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirm to quit this session?</h5>
-          <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body d-flex justify-content-around">
-          <a href="home.html">
-            <button type="button" class="btn btn-primary" id="confirmedQuitSession">Yes</button>
-          </a>
-          <button type="button" class="btn btn-secondary resumeCountDown" data-bs-dismiss="modal">Cancel</button>
-        </div>
-        <!-- <div class="modal-footer">
+    <!-- Modal -->
+    <div class="modal fade" id="quitSessionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm to quit this session?</h5>
+                    <button type="button" class="btn-close resumeCountDown" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-around">
+                    <a href="home.html">
+                        <button type="button" class="btn btn-primary" id="confirmedQuitSession">Yes</button>
+                    </a>
+                    <button type="button" class="btn btn-secondary resumeCountDown" data-bs-dismiss="modal">Cancel</button>
+                </div>
+                <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Understood</button>
       </div> -->
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 
 
-  <!--------------------------------------------------->
-  <!-- Your Javascript Libraries and scripts go here -->
-  <!--------------------------------------------------->
+    <!--------------------------------------------------->
+    <!-- Your Javascript Libraries and scripts go here -->
+    <!--------------------------------------------------->
 
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-  <!-- Option 2: Customized JavaScript modules -->
-  <script src="scripts/timer/updateFirebase.js"></script>
-  <script src="scripts/timer/assumeStartTime.js"></script>
-  <script src="scripts/timer/formatNumbers.js"></script>
-  <script src="scripts/timer/startCountDown.js"></script>
-  <script src="scripts/timer/updateProgressBar.js"></script>
-  <script src="scripts/timer/updateTimer.js"></script>
-  <script src="scripts/timer/index.js"></script>
+    <!-- Option 2: Customized JavaScript modules -->
+    <script src="scripts/timer/updateFirebase.js"></script>
+    <script src="scripts/timer/assumeStartTime.js"></script>
+    <script src="scripts/timer/formatNumbers.js"></script>
+    <script src="scripts/timer/startCountDown.js"></script>
+    <script src="scripts/timer/updateProgressBar.js"></script>
+    <script src="scripts/timer/updateTimer.js"></script>
+    <script src="scripts/timer/index.js"></script>
 </body>
 
 </html>
