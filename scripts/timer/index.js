@@ -88,7 +88,7 @@ class Timer {
         const intervalId = updateTimer(startTime, endTime, 1000);
         timerInstance.setIntervalID(intervalId);
 
-        updateFirebase({ startTime, endTime }, {taskName, taskID});
+        updateFirebase({ startTime, endTime }, { taskName, taskID });
     }
 
     pause() {
@@ -149,19 +149,19 @@ const timerInstance = new Timer();
         endTime.setMilliseconds(endTime.getMilliseconds() + timerInstance.getMillisecondsLeft());
         const startTime = endTime - timerInstance.getSessionLength();
         timerInstance.setTaskID(taskID);
-                
+
         const current = new Date().getTime();
         const difference = endTime - current;
         document.querySelector("#timeSetting").style.display = "block"
         updateProgressBar(startTime, endTime)
 
-        if (difference <= 1000){
+        if (difference <= 1000) {
             const modalOfSessionCompletion = new bootstrap.Modal(document.getElementById('completeSessionModal'))
             document.querySelector("#minute").textContent = "00";
             document.querySelector("#second").textContent = "00";
             modalOfSessionCompletion.show();
         } else {
-            document.querySelector("#resumeFlocus").style.display = "block";    
+            document.querySelector("#resumeFlocus").style.display = "block";
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
             document.querySelector("#minute").textContent = formatNumbers(minutes);
@@ -181,10 +181,10 @@ const timerInstance = new Timer();
         document.querySelector("#stopFlocus").style.display = "none";
         document.querySelector("#music").style.display = "none";
         document.querySelector("#timeSetting").style.display = "block"
-        
-    
 
-        
+
+
+
     } else {
         const taskDetailsFromFirebase = await getTasksFromFirebase();
         console.log(taskDetailsFromFirebase)
@@ -195,7 +195,7 @@ const timerInstance = new Timer();
         })
         document.querySelector("#timeSetting").style.display = "block"
         document.querySelector("#startFlocus").style.display = "block"
-        document.querySelector("#selectExistingTasks").style.display = "block"        
+        document.querySelector("#selectExistingTasks").style.display = "block"
         document.querySelector("#startFlocus").addEventListener("click", () => { timerInstance.init() })
         document.querySelector("#timeSetting").addEventListener('keydown', (event) => {
             if (event.key === "Enter") {
@@ -205,7 +205,7 @@ const timerInstance = new Timer();
         document.querySelectorAll("input").forEach(inputField => inputField.addEventListener("change", () => {
             inputField.value = formatNumbers(inputField.value);
         }))
-    }    
+    }
 })();
 
 document.querySelector("#music").addEventListener("click", () => { timerInstance.changeMusicSetting() });
@@ -237,5 +237,3 @@ document.querySelector("#taskCompleted").addEventListener('click', () => {
 document.querySelector("#taskNotCompleted").addEventListener('click', () => {
     updateTaskCompletionStatus(false, 0);
 })
-
-
