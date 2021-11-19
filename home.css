@@ -83,3 +83,10 @@ form {
   margin-left: 12.5%;
   color: black;
 }
+
+/* validation styles */
+
+.invalid-input {
+  border-color: red;
+  border-width: 5%;
+}
