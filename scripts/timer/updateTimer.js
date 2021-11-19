@@ -1,4 +1,4 @@
-function updateTimer(startTime, endTime, ms){
+function updateTimer(startTime, endTime, ms) {
     const intervalId = setInterval(function() {
         const current = new Date().getTime();
         const difference = endTime - current;
@@ -16,7 +16,7 @@ function updateTimer(startTime, endTime, ms){
             updateProgressBar(startTime, endTime)
         }
 
-        if (difference <= 1000){
+        if (difference <= 1000) {
             clearInterval(intervalId);
             const modalOfSessionCompletion = new bootstrap.Modal(document.getElementById('completeSessionModal'))
             modalOfSessionCompletion.show();

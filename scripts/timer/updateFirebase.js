@@ -3,8 +3,8 @@ const usersDb = db.collection("timerSessions");
 const userName = "TEST USER";
 
 async function updateFirebase(timeInfo, taskInfo) {
-    const {startTime, endTime} = timeInfo;
-    const {taskName, taskID} = taskInfo
+    const { startTime, endTime } = timeInfo;
+    const { taskName, taskID } = taskInfo
     const msLeft = endTime - startTime - 1000;
     const sessionLength = endTime - startTime;
     usersDb.add({
@@ -40,22 +40,22 @@ async function deactivateSessionInFirebase() {
     window.location.assign("home.html");
 }
 
-async function updateTaskCompletionStatus(status, msLeft, taskID = null){
+async function updateTaskCompletionStatus(status, msLeft, taskID = null) {
     const currentUser = db.collection("timerSessions").where("user", "==", userName).where("isActive", "==", true)
     const query = await currentUser.get();
     const doc = query.docs[0]
-    const {estimatedSessionLength} = doc.data();
+    const { estimatedSessionLength } = doc.data();
     await doc.ref.update({
         taskCompleted: status,
         isActive: false,
         actualTimeSpentForCompletion: estimatedSessionLength - msLeft,
         msLeft: 0
     });
-    if(status === true){
+    if (status === true) {
         const taskDb = db.collection("tasks")
         const taskDoc = taskDb.doc(taskID)
         const taskDocContent = await taskDoc.get();
-        let {timeSpent} = taskDocContent.data();
+        let { timeSpent } = taskDocContent.data();
         timeSpent += (estimatedSessionLength - msLeft);
         await taskDoc.update({
             isCompleted: true,
@@ -67,21 +67,21 @@ async function updateTaskCompletionStatus(status, msLeft, taskID = null){
     } else {
         window.location.assign("home.html");
     }
-    
+
 }
 
-async function getSessionStatusFromFirebase(){
+async function getSessionStatusFromFirebase() {
     const currentUser = db.collection("timerSessions").where("user", "==", userName).where("isActive", "==", true)
-    const query = await currentUser.get();    
-    if (query.size == 1){
+    const query = await currentUser.get();
+    if (query.size == 1) {
         const sessionDetails = query.docs[0].data()
         return sessionDetails;
     }
 }
 
-async function getTasksFromFirebase(){
+async function getTasksFromFirebase() {
     const currentUser = db.collection("tasks").where("user", "==", userName).where("isCompleted", "==", false)
-    const query = await currentUser.get();    
+    const query = await currentUser.get();
     const result = query.docs.map(doc => {
         return {
             id: doc.id,

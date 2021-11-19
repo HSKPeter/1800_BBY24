@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Flocus</title>
     <meta name="Flocus" content="timer">
-  
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
+
     <!-- Custom list home page css -->
     <link href="home.css" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -32,35 +30,29 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <script src="scripts/apiKey.js"></script>
 
-  </head>
-  
-  <body>
+</head>
+
+<body>
     <!-- Top navbar -->
     <nav class="navbar navbar-light bg-primary mb-3">
-      <div class="container py-2">
-        <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
-        <a href="settings.html"><i class="material-icons text-white">settings</i></a>
-      </div>
+        <div class="container py-2">
+            <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
+            <a href="settings.html"><i class="material-icons text-white">settings</i></a>
+        </div>
     </nav>
-  
+
     <!-- Main container -->
     <div class="container">
 
-      <!-- Task information modal -->
-      <div class="modal fade" tabindex="-1" id="task-modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Please Fill In The Task Information</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-                
-            <!-- Task Name field -->
-            <input type="text" class="form-control" id="task-name" placeholder="Task Name">
-  
-            <!-- Due Date-->
-            <input type="date" id="task-due-date">
+        <!-- Task information modal -->
+        <div class="modal fade" tabindex="-1" id="task-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Please Fill In The Task Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
             <!-- Task Status -->
             <div class="task-status" id="status">   
@@ -68,105 +60,107 @@
                 <button class="btn btn-dark dropdown-toggle" type="button" id="status-drop-down-button" data-bs-toggle="dropdown" aria-expanded="false">
                   Task Status
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="drop-down-due-date" id="status-dropdown-buttons">
-                  <li id="status-drop-down-button-1" onclick="toggleClickedButton(this)"><a class="dropdown-item active" href="#">Not-Started</a></li>
-                  <li onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">In-Progress</a></li>
-                  <li onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Done</a></li>
-                </ul>
-              </div>
-            </div>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="drop-down-due-date" id="status-dropdown-buttons">
+                                    <li id="status-drop-down-button-1" onclick="toggleClickedButton(this)"><a class="dropdown-item active" href="#">Not-Started</a></li>
+                                    <li onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">In-Progress</a></li>
+                                    <li onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Done</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-            <!-- Task Length -->
-            <div class="task-info" id="task-info-container">
-              <div class="dropdown" id="task-length">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="drop-down-length" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- Task Length -->
+                        <div class="task-info" id="task-info-container">
+                            <div class="dropdown" id="task-length">
+                                <button class="btn btn-dark dropdown-toggle" type="button" id="drop-down-length" data-bs-toggle="dropdown" aria-expanded="false">
                   Length of Task
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark" id="length-dropdown-buttons" aria-labelledby="dropdownMenuButton2">
-                  <li id="length-drop-down-b1" onclick="toggleClickedButton(this)"><a class="dropdown-item active" href="#">Very-Short</a></li>
-                  <li id="length-drop-down-b2" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Short</a></li>
-                  <li id="length-drop-down-b3" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Medium</a></li>
-                  <li id="length-drop-down-b4" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Large</a></li>
-                  <li id="length-drop-down-b5" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Very-Large</a></li>
-                </ul>
-              </div>
+                                <ul class="dropdown-menu dropdown-menu-dark" id="length-dropdown-buttons" aria-labelledby="dropdownMenuButton2">
+                                    <li id="length-drop-down-b1" onclick="toggleClickedButton(this)"><a class="dropdown-item active" href="#">Very-Short</a></li>
+                                    <li id="length-drop-down-b2" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Short</a></li>
+                                    <li id="length-drop-down-b3" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Medium</a></li>
+                                    <li id="length-drop-down-b4" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Large</a></li>
+                                    <li id="length-drop-down-b5" onclick="toggleClickedButton(this)"><a class="dropdown-item" href="#">Very-Large</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Ok -->
+                        <button id="finish-task-settings" class="btn btn-dark" type="button" data-bs-dismiss="modal" onclick="logNewTaskData()">Ok</button>
+
+                        <!-- Cancel -->
+                        <div class="task-info">
+                            <button data-close-button class="btn btn-light cancel-button" data-bs-toggle="modal" data-bs-target="#task-modal" type="button">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
-            <!-- Ok -->
-            <button id="finish-task-settings" class="btn btn-dark" type="button" data-bs-dismiss="modal" onclick="logNewTaskData()">Ok</button>
-
-            <!-- Cancel -->
-            <div class="task-info">
-              <button data-close-button class="btn btn-light cancel-button" data-bs-toggle="modal" data-bs-target="#task-modal" type="button">Cancel</button>
-            </div>
-
-          </div>
-          </div>
         </div>
-      </div>
 
-      <!-- Conformation on deleting all tasks modal -->
-      <div class="modal fade" id="delete-all-tasks-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete All Tasks</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Conformation on deleting all tasks modal -->
+        <div class="modal fade" id="delete-all-tasks-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete All Tasks</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete all tasks? This cannot be undone!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="removeAllTasksFromDB()">Yes delete all tasks</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-              Are you sure you want to delete all tasks? This cannot be undone!
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="removeAllTasksFromDB()">Yes delete all tasks</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
         </div>
-      </div>
-      
-      <!--- Home Page-->
-      <h1 id="welcome">Welcome <span id="user-name"></span></h1>
 
-      <!-- Tasks (tasks are populated through firebase)-->
-      <br/><br/><br/>
-      <h2 class="text-center">Edit a task by clicking it</h2>
-      <div id="task-container">
-      </div>
+        <!--- Home Page-->
+        <h1 id="welcome">Welcome <span id="user-name"></span></h1>
 
-      <!-- Buttons -->
-      <div class="d-grid mx-auto">
-        <!-- Button trigger modal -->
-        <button type="button" id="new-task-button" class="btn btn-info btn-lg" onclick="removeEditPlaceholderData()" data-bs-toggle="modal" data-bs-target="#task-modal">New Task</button>
-        <button id="delete-all-tasks-button" class="btn btn-info btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#delete-all-tasks-modal">Delete All Tasks</button>
-      </div>
-    
-      <!-- Quote -->
-      <br/><br>
-      <figure class="text-center">
-        <blockquote class="blockquote" id="quote"> <!-- This needs to be DOM which grabs a new quote every hour (or maybe every time the page is loaded)-->
+        <!-- Tasks (tasks are populated through firebase)-->
+        <br/><br/><br/>
+        <h2 class="text-center">Edit a task by clicking it</h2>
+        <div id="task-container">
+        </div>
 
-        </blockquote>
-        <figcaption class="blockquote-footer" id="quote-author">
-          
-        </figcaption>
-      </figure>
-      <br/><br/><br/>
+        <!-- Buttons -->
+        <div class="d-grid mx-auto">
+            <!-- Button trigger modal -->
+            <button type="button" id="new-task-button" class="btn btn-info btn-lg" onclick="removeEditPlaceholderData()" data-bs-toggle="modal" data-bs-target="#task-modal">New Task</button>
+            <button id="delete-all-tasks-button" class="btn btn-info btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#delete-all-tasks-modal">Delete All Tasks</button>
+        </div>
+
+        <!-- Quote -->
+        <br/><br>
+        <figure class="text-center">
+            <blockquote class="blockquote" id="quote">
+                <!-- This needs to be DOM which grabs a new quote every hour (or maybe every time the page is loaded)-->
+
+            </blockquote>
+            <figcaption class="blockquote-footer" id="quote-author">
+
+            </figcaption>
+        </figure>
+        <br/><br/><br/>
     </div>
-  
+
     <!-- Bottom navbar -->
     <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
-      <div class="container py-2 mx-5">
-        <a href="timer.html"><i class="material-icons text-white">timer</i></a>
-        <a href="home.html"><i class="material-icons text-white">list</i></a>
-        <a href="statics.html"><i class="material-icons text-white">bar_chart</i></a>
-      </div>
+        <div class="container py-2 mx-5">
+            <a href="timer.html"><i class="material-icons text-white">timer</i></a>
+            <a href="home.html"><i class="material-icons text-white">list</i></a>
+            <a href="statics.html"><i class="material-icons text-white">bar_chart</i></a>
+        </div>
     </footer>
 
     <!--------------------------------------------------->
     <!-- Your Javascript Libraries and scripts go here -->
     <!--------------------------------------------------->
-    <script src="scripts/home/taskSetup.js"></script> 
+    <script src="scripts/home/taskSetup.js"></script>
     <script src="scripts/home/homeText.js"></script>
 
-  </body>
+</body>
+
 </html>
