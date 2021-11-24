@@ -18,7 +18,13 @@
 
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="stylesheet" href="styles/timer.css">
+    <link rel="stylesheet" href="styles/colorTheme.css">
 
     <!-- Firebase 8 CDNs-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,7 +41,7 @@
     <!-- Your own HTML layout goes here -->
     <!------------------------------------>
 
-    <nav class="navbar navbar-light bg-secondary">
+    <nav class="navbar navbar-light bg-primary-color-scheme">
         <div class="container py-2">
             <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
             <a href="settings.html">
@@ -88,24 +94,24 @@
                 <div class="d-flex justify-content-center align-items-center flex-column">
                     <div class="d-flex justify-content-center align-items-center flex-column" id="controlButtons">
                         <div>
-                            <button class="btn btn-secondary" type="button" id="startFlocus">
+                            <button class="btn btn-dark" type="button" id="startFlocus">
                                 <i class="bi bi-play-fill"></i>
                                 <span>Start Flocus</span>
                             </button>
                         </div>
                         <div>
-                            <button class="btn btn-secondary" type="button" id="resumeFlocus">
+                            <button class="btn btn-dark" type="button" id="resumeFlocus">
                                 <i class="bi bi-play-fill"></i>
                                 <span>Resume Flocus</span>
                             </button>
                         </div>
                         <div class="w-100 d-flex justify-content-around align-items-center">
-                            <button class="btn btn-secondary" type="button" id="pauseFlocus">
+                            <button class="btn btn-dark" type="button" id="pauseFlocus">
                                 <i class="bi bi-pause-fill"></i>
                                 <span>Pause</span>
                             </button>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="stopFlocus"
+                                <button class="btn btn-dark dropdown-toggle" type="button" id="stopFlocus"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-stop-fill"></i>
                                     <span>Stop</span>
@@ -121,7 +127,7 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        <button class="btn btn-secondary" type="button" id="music" data-music="on">
+                        <button class="btn btn-dark" type="button" id="music" data-music="on">
                             <i class="bi bi-volume-up-fill"></i>
                         </button>
                     </div>
@@ -132,7 +138,7 @@
     </div>
 
 
-    <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
+    <footer class="navbar justify-content-evenly bg-primary-color-scheme fixed-bottom">
         <div class="container py-2 mx-5">
             <a href="timer.html">
                 <i class="material-icons text-white">timer</i>
@@ -217,11 +223,11 @@
                     <!-- <a href="home.html"> -->
                     <button type="button" class="btn btn-primary" id="confirmedQuitSession">Yes</button>
                     <!-- </a> -->
-                    <button type="button" class="btn btn-secondary resumeCountDown"
+                    <button type="button" class="btn btn-dark resumeCountDown"
                         data-bs-dismiss="modal">Cancel</button>
                 </div>
                 <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Understood</button>
       </div> -->
             </div>
@@ -239,7 +245,7 @@
         crossorigin="anonymous"></script>
 
     <!-- Option 2: Customized JavaScript modules -->
-    <script src="scripts/loginAuthentication.js"></script>
+    <!-- <script src="scripts/loginAuthentication.js"></script> -->
     <script src="scripts/timer/updateFirebase.js"></script>
     <script src="scripts/timer/assumeStartTime.js"></script>
     <script src="scripts/timer/formatNumbers.js"></script>

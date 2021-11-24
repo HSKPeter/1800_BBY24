@@ -1,21 +1,23 @@
-const usersDb = db.collection("users").doc("WMMSrfYUb0OpmQ60qVYS9jqwnhX2").collection("timerSessions");
-
-const userName = "TEST USER";
-
 async function updateFirebase(timeInfo, taskInfo) {
-    const { startTime, endTime } = timeInfo;
-    const { taskName, taskID } = taskInfo
-    const msLeft = endTime - startTime - 1000;
-    const sessionLength = endTime - startTime;
-    usersDb.add({
-        taskName: taskName,
-        taskID: taskID,
-        invokeTime: startTime,
-        msLeft: msLeft,
-        estimatedSessionLength: sessionLength,
-        actualTimeSpentForCompletion: sessionLength,
-        isActive: true,
-    });
+    return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged(async(user) => {
+            const { startTime, endTime } = timeInfo;
+            const { taskName, taskID } = taskInfo
+            const msLeft = endTime - startTime - 1000;
+            const sessionLength = endTime - startTime;
+            await db.collection("users").doc(user.uid).collection("timerSessions").add({
+                taskName: taskName,
+                taskID: taskID,
+                invokeTime: startTime,
+                msLeft: msLeft,
+                estimatedSessionLength: sessionLength,
+                actualTimeSpentForCompletion: sessionLength,
+                isActive: true,
+            });
+            resolve();
+        })
+
+    })
 }
 
 async function setMsInFirebase(msLeft) {
@@ -83,20 +85,22 @@ async function updateTaskCompletionStatus(status, msLeft, taskID = null) {
                     msLeft: 0
                 });
     
-                if (status === true) {
-                    const taskDb = db.collection("tasks")
-                    const taskDoc = taskDb.doc(taskID)
-                    const taskDocContent = await taskDoc.get();
-                    let { timeSpent } = taskDocContent.data();
-                    timeSpent += (estimatedSessionLength - msLeft);
+                const taskDb = db.collection("tasks")
+                const taskDoc = taskDb.doc(taskID)
+                const taskDocContent = await taskDoc.get();
+                let { timeSpent } = taskDocContent.data();
+                timeSpent += (estimatedSessionLength - msLeft);
+                if (status === true) {                    
                     await taskDoc.update({
-                        isCompleted: true,
-                        status: "done",
+                        status: "Done",
                         timeSpent: timeSpent
                     });
-            
                     window.location.assign("statics.html");
                 } else {
+                    await taskDoc.update({
+                        status: "In-Progress",
+                        timeSpent: timeSpent
+                    });
                     window.location.assign("home.html");
                 }
                 resolve();
@@ -130,7 +134,7 @@ async function getTasksFromFirebase() {
             if (!user){
                 window.location.replace("/login.html");
             }
-            const activeTasks = db.collection("users").doc(user.uid).collection("tasks").where("isActive", "==", true)
+            const activeTasks = db.collection("users").doc(user.uid).collection("tasks").where("taskStatus", "!=", "Done")
             const query = await activeTasks.get();
             const result = query.docs.map(doc => {
                 return {
