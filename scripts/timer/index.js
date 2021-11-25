@@ -1,9 +1,10 @@
-class Timer {#
-    intervalID;#
-    sessionLength;#
-    millisecondsLeft;#
-    isPlayingMusic;#
-    taskID;
+// The Timer class would manage  data variables that are needed to operate the timer.
+class Timer {
+    #intervalID;
+    #sessionLength;
+    #millisecondsLeft;
+    #isPlayingMusic;
+    #taskID;
 
     constructor() {
         this.#isPlayingMusic = true;
@@ -135,6 +136,7 @@ class Timer {#
 
 }
 
+// Instantiate an instance of the Timer class
 const timerInstance = new Timer();
 
 (async() => {

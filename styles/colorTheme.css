@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Orbitron:wght@700&family=Playball&display=swap');
+
+.bg-primary-color-scheme {
+    background-color: #265077;
+}
+
+#appTitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+}
