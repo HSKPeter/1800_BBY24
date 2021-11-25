@@ -1,93 +1,20 @@
-/***** Main page *****/
-
-#new-task-button,#delete-all-tasks-button {
-    font-size: 4vw;
+.main-container {
+    height: 100%;
 }
 
-h1,h2,h3 {
-    text-align: center;
-    cursor: default;
+.material-icons {
+    font-size: 36px;
 }
 
-h1 {
-    font-size: clamp(1.5em, 6vw, 4em);
+.text-secondary-color-scheme {
+    color: white !important
 }
 
-h2 {
-    font-size: 5vw;
+.bg-primary-color-scheme {
+    background-color: #265077;
 }
 
-p {
-    font-size: 3vw;
-}
-
-#task-container {
-    height: 25em;
-    row-gap: 1%;
-    margin: 5%;
-    padding: 5%;
-    background-color: rgb(14, 91, 179);
-    border-style: solid;
-    border-color: black;
-    border-width: 0.4rem;
-    overflow-y: scroll;
-    cursor: default;
-}
-
-.task {
-    padding: 5% 5%;
-    background-color: lightblue;
-    text-align: center;
-    border: solid black 0.5rem;
-    cursor: pointer;
-}
-
-.task>h1 {
-    cursor: pointer;
-}
-
-button {
-    width: 90%;
-    margin: 1.5% 0;
-    margin-left: 5%;
-}
-
-input {
-    max-width: 90%;
-    margin: 1.5% 0;
-    margin-left: 5%;
-}
-
-.blockquote-footer {
-    font-size: 2vw;
-}
-
-form {
-    width: 100vw;
-    margin-left: 25%;
-}
-
-#task-container>p {
-    justify-self: center;
-    text-align: left;
-}
-
-
-/***** POPUP *****/
-
-.modal {
-    position: fixed;
-    position: center;
-}
-
-.modal-title {
-  margin-left: 12.5%;
-  color: black;
-}
-
-/* validation styles */
-
-.invalid-input {
-  border-color: red;
-  border-width: 5%;
+#appTitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
 }
