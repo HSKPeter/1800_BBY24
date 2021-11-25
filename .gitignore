@@ -1,3 +1,4 @@
 .DS_Store
 scripts/firebase_API.js
 scripts/apiKey.js
+scripts/apiKeys.js

@@ -1,8 +1,10 @@
+// The Timer class would manage  data variables that are needed to operate the timer.
 class Timer {
     #intervalID;
     #sessionLength;
     #millisecondsLeft;
     #isPlayingMusic;
+    #taskID;
 
     constructor() {
         this.#isPlayingMusic = true;
@@ -14,6 +16,14 @@ class Timer {
 
     getIntervalID() {
         return this.#intervalID;
+    }
+
+    setTaskID(id) {
+        this.#taskID = id;
+    }
+
+    getTaskID() {
+        return this.#taskID;
     }
 
     setSessionLength(sessionLength) {
@@ -38,7 +48,12 @@ class Timer {
             alert("Please choose a task in the dropdown menu.")
             return;
         }
-        const taskName = document.querySelector('#selectExistingTasks').value;
+
+        const dropdownMenu = document.querySelector('#selectExistingTasks')
+        const taskName = dropdownMenu.options[dropdownMenu.selectedIndex].textContent
+        const taskID = dropdownMenu.value;
+
+        timerInstance.setTaskID(taskID);
 
         document.querySelector("#task").innerHTML = `
         <strong>
@@ -73,7 +88,7 @@ class Timer {
         const intervalId = updateTimer(startTime, endTime, 1000);
         timerInstance.setIntervalID(intervalId);
 
-        updateFirebase({ startTime, endTime }, taskName);
+        updateFirebase({ startTime, endTime }, { taskName, taskID });
     }
 
     pause() {
@@ -121,26 +136,37 @@ class Timer {
 
 }
 
+// Instantiate an instance of the Timer class
 const timerInstance = new Timer();
 
 (async() => {
-    const detailsFromFirebase = await getSessionStatusFromFirebase();
-    if (detailsFromFirebase) {
-        const { taskName, msLeft, sessionLength } = detailsFromFirebase;
+    const sessionDetailsFromFirebase = await getSessionStatusFromFirebase();
+    if (sessionDetailsFromFirebase) {
+        const { taskName, msLeft, estimatedSessionLength, taskID } = sessionDetailsFromFirebase;
         const endTime = new Date();
         timerInstance.setMillisecondsLeft(msLeft);
-        timerInstance.setSessionLength(sessionLength);
+        timerInstance.setSessionLength(estimatedSessionLength);
         endTime.setMilliseconds(endTime.getMilliseconds() + timerInstance.getMillisecondsLeft());
         const startTime = endTime - timerInstance.getSessionLength();
-                
+        timerInstance.setTaskID(taskID);
+
         const current = new Date().getTime();
         const difference = endTime - current;
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        document.querySelector("#minute").textContent = formatNumbers(minutes);
-        document.querySelector("#second").textContent = formatNumbers(seconds);
         document.querySelector("#timeSetting").style.display = "block"
         updateProgressBar(startTime, endTime)
+
+        if (difference <= 1000) {
+            const modalOfSessionCompletion = new bootstrap.Modal(document.getElementById('completeSessionModal'))
+            document.querySelector("#minute").textContent = "00";
+            document.querySelector("#second").textContent = "00";
+            modalOfSessionCompletion.show();
+        } else {
+            document.querySelector("#resumeFlocus").style.display = "block";
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            document.querySelector("#minute").textContent = formatNumbers(minutes);
+            document.querySelector("#second").textContent = formatNumbers(seconds);
+        }
 
         document.querySelector("#task").innerHTML = `
         <strong>
@@ -155,14 +181,21 @@ const timerInstance = new Timer();
         document.querySelector("#stopFlocus").style.display = "none";
         document.querySelector("#music").style.display = "none";
         document.querySelector("#timeSetting").style.display = "block"
-        document.querySelector("#resumeFlocus").style.display = "block";    
-    
 
-        
+
+
+
     } else {
+        const taskDetailsFromFirebase = await getTasksFromFirebase();
+        console.log(taskDetailsFromFirebase)
+        taskDetailsFromFirebase.forEach(task => {
+            document.querySelector('#selectExistingTasks').innerHTML += `
+            <option value="${task.id}">${task.name}</option>\n          
+            `
+        })
         document.querySelector("#timeSetting").style.display = "block"
         document.querySelector("#startFlocus").style.display = "block"
-        document.querySelector("#selectExistingTasks").style.display = "block"        
+        document.querySelector("#selectExistingTasks").style.display = "block"
         document.querySelector("#startFlocus").addEventListener("click", () => { timerInstance.init() })
         document.querySelector("#timeSetting").addEventListener('keydown', (event) => {
             if (event.key === "Enter") {
@@ -172,7 +205,7 @@ const timerInstance = new Timer();
         document.querySelectorAll("input").forEach(inputField => inputField.addEventListener("change", () => {
             inputField.value = formatNumbers(inputField.value);
         }))
-    }    
+    }
 })();
 
 document.querySelector("#music").addEventListener("click", () => { timerInstance.changeMusicSetting() });
@@ -186,7 +219,7 @@ document.querySelectorAll('.pauseCountDown').forEach(element => element.addEvent
 }));
 
 document.querySelectorAll(".updateTaskProgress").forEach(inputField => inputField.addEventListener("click", () => {
-    document.querySelectorAll("#notification").pause();
+    document.querySelector("#notification").pause();
 }))
 
 document.querySelector("#confirmedQuitSession").addEventListener('click', () => {
@@ -194,8 +227,13 @@ document.querySelector("#confirmedQuitSession").addEventListener('click', () => 
 })
 
 document.querySelector("#confirmedEndSessionEarly").addEventListener('click', () => {
-    setMsInFirebase(0);
-    updateTaskCompletionStatus(true);
+    updateTaskCompletionStatus(true, timerInstance.getMillisecondsLeft(), timerInstance.getTaskID());
 })
 
+document.querySelector("#taskCompleted").addEventListener('click', () => {
+    updateTaskCompletionStatus(true, 0, timerInstance.getTaskID());
+})
 
+document.querySelector("#taskNotCompleted").addEventListener('click', () => {
+    updateTaskCompletionStatus(false, 0);
+})
