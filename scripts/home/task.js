@@ -8,8 +8,8 @@
 // DONE 6) Add loading spinner
 // DONE 7) After the user deletes a task, the task list is reloaded by AJAX calls, without reloading the whole page
 // DONE 8) Fixed bugs of delete all tasks
-// 9) Set pending as default
-// 10) Bug of deleting task
+// DONE 9) Set pending as default
+// DONE 10) Bug of deleting all tasks
 const taskContainer = document.getElementById("task-container");
 
 updateTaskList();
