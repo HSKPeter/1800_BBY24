@@ -136,7 +136,7 @@ async function getTasksFromFirebase() {
             }
             const activeTasks = db.collection("users").doc(user.uid).collection("tasks").where("taskStatus", "!=", "Done")
             const query = await activeTasks.get();
-            const result = query.docs.map(doc => {
+            const result = query.docs.sort(sortTasks).map(doc => {
                 return {
                     id: doc.id,
                     name: doc.data().name
