@@ -4,8 +4,8 @@
         <div class="d-flex justify-content-between">
             <h4 class="task-title card-title">Task Title</h4>
             <div>
-                <button id="edit-task-button" class="btn btn-secondary" type="button"><i class="bi bi-pencil-square"></i></button>
-                <button id="delete-task-button" class="btn btn-danger" type="button"><i class="bi bi-trash-fill"></i></button>
+                <button data-bs-toggle="modal" data-bs-target="#task-info-modal" id="edit-task-button" class="btn btn-secondary" type="button"><i class="bi bi-pencil-square"></i></button>
+                <button data-bs-toggle="modal" data-bs-target="#delete-task-modal" id="delete-task-button" class="btn btn-danger" type="button"><i class="bi bi-trash-fill"></i></button>
             </div>
         </div>
         <div class="card-text mt-3">

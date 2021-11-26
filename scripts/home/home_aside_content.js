@@ -30,7 +30,9 @@ function readDisplayQuote(documentName) {
   db.collection("quotes").doc(documentName)
       .onSnapshot(genericQuotesDoc => {
           const randomQuoteIndex = Math.floor(Math.random() * genericQuotesDoc.data().size) + 1;
-          const quoteMap = genericQuotesDoc.data()[randomQuoteIndex.toString()];
+          const quoteMap = genericQuotesDoc.data()[randomQuoteIndex];
+          console.log(quoteMap);
+
           //document.getElementById("quote").textContent = quoteMap;
           //document.getElementById("quote-author").textContent = "Test";
       });
