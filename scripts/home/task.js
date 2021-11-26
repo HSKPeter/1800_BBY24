@@ -1,6 +1,6 @@
 /**** PROBLEMS *****/
 // DONE 1) delete button does not work (delete all tasks does however)
-// 2) allow the prevention of duplicate tasks (update instead of adding a new task each time)
+// DONE 2) allow the prevention of duplicate tasks (update instead of adding a new task each time)
 // DONE 3) fix the issue when gathering the current server time to allow the sorting to work. Also there may be an issue with the sorting algorithmn because the return value is undefined for some reason
 // (sorted tasks alphabetically)
 // DONE 4) the screen gets bugged when deleteding a task, so it will need to be refreshed in specific cases
@@ -8,7 +8,8 @@
 // DONE 6) Add loading spinner
 // DONE 7) After the user deletes a task, the task list is reloaded by AJAX calls, without reloading the whole page
 // DONE 8) Fixed bugs of delete all tasks
-
+// 9) Set pending as default
+// 10) Bug of deleting task
 const taskContainer = document.getElementById("task-container");
 
 updateTaskList();
@@ -20,15 +21,15 @@ updateTaskList();
  * nessesary once we add the input validation in html)
  */
 function addTask() {
-
+    const taskID = document.querySelector("#submitTaskToFirebase").dataset.taskid;
     let name = document.getElementById("task-name-choice").value;
     let date = document.getElementById("task-date-choice").value;
     let status = document.getElementById("task-status-choice").value;
     let length = document.getElementById("task-length-choice").value;
 
     if (isTaskInfoValid(name, date, status, length)) {
-        uploadTask(name, date, status, length);
-    } else { 
+        uploadTask(name, date, status, length, taskID);
+    } else {
         console.log("That is not a valid task!");
     }
 }
@@ -40,7 +41,7 @@ function wipeTaskInputFields() {
     document.querySelector("#task-name-choice").value = "";
     document.querySelector("#task-date-choice").value = "";
     document.querySelector("#task-length-choice").value = "";
-    document.querySelector("#task-status-choice").value = "";
+    document.querySelector("#task-status-choice").value = "Pending";
 }
 
 /**
@@ -51,8 +52,8 @@ function wipeTaskInputFields() {
  * @param status uploaded to firebase and task container
  * @param length uploaded to firebase and task container
  */
-function uploadTask(name, date, status, length) {
-    addTaskDataToFirebase(name, date, status, length);
+async function uploadTask(name, date, status, length, taskID) {
+    await addTaskDataToFirebase(name, date, status, length, taskID);
     clearTaskListFromScreen();
     updateTaskList();
 }
@@ -108,9 +109,9 @@ function addTaskToScreen(name, date, status, length, id) {
         currentTasks.forEach(task => {
             console.log(task);
         });
-        
+
         currentTasks.forEach(task => {
-             editButtonListener(task);
+            editButtonListener(task);
             deleteButtonListener(task);
             taskContainer.appendChild(task);
         });
@@ -141,15 +142,23 @@ function sortByServerTime(tasks) {
     return tasks;
 }
 
-function addTaskDataToFirebase(name, date, status, length) {
+async function addTaskDataToFirebase(name, date, status, length, taskID) {
     //put the task data into firestore database (needs to be changed so that duplicate data isn't always added when editing a task)
-    db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").add({
-        name: name,
-        dueDate: date,
-        taskStatus: status,
-        taskLength: length
-    });
-    
+    if (taskID){
+        await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").doc(taskID).set({
+            name: name,
+            dueDate: date,
+            taskStatus: status,
+            taskLength: length
+        });
+    } else {
+        await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").add({
+            name: name,
+            dueDate: date,
+            taskStatus: status,
+            taskLength: length
+        });
+    }
 }
 
 function isTaskInfoValid(name, date, status, length) {
@@ -167,39 +176,40 @@ function clearTaskListFromScreen() {
 }
 
 function removeAllTasks() {
-    db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").get().then(snapshot => {
-        snapshot.forEach(doc => {
-            doc.ref.delete();
-        });
+    db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").get().then(async (snapshot) => {
+        clearTaskListFromScreen();
+        snapshot.forEach(async (doc) => {
+            await doc.ref.delete();
+        });        
+        updateTaskList();
     });
-    clearTaskListFromScreen();
-    updateTaskList();
+
 }
 
 /**
  * Updates the task container by grabbing each task data from firebase and adding them to the task list
  */
 function updateTaskList() {
-  let currentUser = db.collection("users").doc(localStorage.getItem("userId"));
-  currentUser.collection("tasks").get().then(snapshot => {
-    if (snapshot.docs.length == 0) {
-        taskContainer.innerHTML = "You currently have no tasks!";
-    } else {
-        console.log(snapshot.docs)
-        snapshot.docs.sort(sortTasks).forEach(task => {
-            console.log(task.data())
-          let name = task.data()["name"];
-          let date = task.data()["dueDate"];
-          let status = task.data()["taskStatus"];
-          let length = task.data()["taskLength"];
-          let id = task.id;
-          addTaskToScreen(name, date, status, length, id);
-      });
-    }
-  });
+    let currentUser = db.collection("users").doc(localStorage.getItem("userId"));
+    currentUser.collection("tasks").get().then(snapshot => {
+        if (snapshot.docs.length == 0) {
+            taskContainer.innerHTML = "You currently have no tasks!";
+        } else {
+            console.log(snapshot.docs)
+            snapshot.docs.sort(sortTasks).forEach(task => {
+                console.log(task.data())
+                let name = task.data()["name"];
+                let date = task.data()["dueDate"];
+                let status = task.data()["taskStatus"];
+                let length = task.data()["taskLength"];
+                let id = task.id;
+                addTaskToScreen(name, date, status, length, id);
+            });
+        }
+    });
 }
 
-function sortTasks(task1, task2){
+function sortTasks(task1, task2) {
     const nameOfTask1 = task1.data()["name"];
     const nameOfTask2 = task2.data()["name"];
     return nameOfTask1.localeCompare(nameOfTask2);
@@ -220,7 +230,10 @@ function editButtonListener(task) {
         document.querySelector("#task-name-choice").value = taskTitle;
         document.querySelector("#task-date-choice").value = taskDueDate;
         document.querySelector("#task-length-choice").value = taskLength;
-        document.querySelector("#task-status-choice").value = taskStatus; 
+        document.querySelector("#task-status-choice").value = taskStatus;
+
+        document.querySelector("#submitTaskToFirebase").setAttribute("data-taskid", task.getAttribute("data-taskid"));
+        document.querySelector("#submitTaskToFirebase").textContent = "Edit";
     });
 }
 
@@ -237,7 +250,7 @@ function deleteButtonListener(task) {
         document.querySelectorAll(".task-name").textContent = "TEST";
 
         // this will be called if the user clicks on the delete task button in the modal
-        removeTask = async function() {
+        removeTask = async function () {
             clearTaskListFromScreen();
             await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").doc(task.getAttribute('data-taskId')).delete();
             updateTaskList();
