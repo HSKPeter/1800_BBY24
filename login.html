@@ -23,45 +23,26 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <script src="scripts/apiKey.js"></script>
 
-    <!-- Custom Styles For login page-->
-    <style>
-        #login-container {
-            display: grid;
-            grid-template-columns: 100%;
-            grid-template-rows: 30% 70%;
-            align-content: center;
-            justify-content: center;
-            height: 100%;
-        }
-        
-        header {
-            padding-top: 2.1rem;
-            background-color: rgb(51, 52, 122);
-            font-size: 300%;
-            color: white;
-            text-align: center;
-        }
-        
-        * {
-            margin: none;
-            padding: none;
-        }
-    </style>
+    <!-- Google Icons (Material Design)-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="styles/timer.css">
+    <link rel="stylesheet" href="styles/colorTheme.css">
+
 </head>
 
 <body>
-    <div id="login-container">
-        <!-- header-->
-        <header>
-            Flocus
-        </header>
-        <!--Body-->
+    <nav class="navbar navbar-light bg-primary-color-scheme">
+        <div class="container py-2">
+            <a class="navbar-brand text-white" href="#" id="appTitle">Flocus</a>
+        </div>
+    </nav>
+    <div class="mt-4">
         <div>
-            <div class="container">
-                <br/><br/><br/>
-                <h2 class="display-4 text-center"><b>Sign-In to Flocus</b></h2>
-            </div>
-            <br/><br/>
             <div id="firebaseui-auth-container"></div>
             <div id="loader">Loading...</div>
         </div>
