@@ -1,9 +1,13 @@
 /**** PROBLEMS *****/
 // DONE 1) delete button does not work (delete all tasks does however)
 // 2) allow the prevention of duplicate tasks (update instead of adding a new task each time)
-// 3) fix the issue when gathering the current server time to allow the sorting to work. Also there may be an issue with the sorting algorithmn because the return value is undefined for some reason
+// DONE 3) fix the issue when gathering the current server time to allow the sorting to work. Also there may be an issue with the sorting algorithmn because the return value is undefined for some reason
+// (sorted tasks alphabetically)
 // DONE 4) the screen gets bugged when deleteding a task, so it will need to be refreshed in specific cases
-// 5) Bug occurs when user add task one by one (without reloading the page)
+// DONE 5) Bug occurs when user add task one by one (without reloading the page)
+// DONE 6) Add loading spinner
+// DONE 7) After the user deletes a task, the task list is reloaded by AJAX calls, without reloading the whole page
+// DONE 8) Fixed bugs of delete all tasks
 
 const taskContainer = document.getElementById("task-container");
 
@@ -66,7 +70,7 @@ function uploadTask(name, date, status, length) {
  * @param id set as the task id set on the task snippet
  */
 function addTaskToScreen(name, date, status, length, id) {
-
+    taskContainer.innerHTML = "";
     fetch("task.xml").then(response => response.text()).then(data => {
         let currentTasks = Array.from(taskContainer.children);
 
@@ -106,7 +110,7 @@ function addTaskToScreen(name, date, status, length, id) {
         });
         
         currentTasks.forEach(task => {
-            editButtonListener(task);
+             editButtonListener(task);
             deleteButtonListener(task);
             taskContainer.appendChild(task);
         });
@@ -153,11 +157,13 @@ function isTaskInfoValid(name, date, status, length) {
 }
 
 function clearTaskListFromScreen() {
-    const tasks = Array.from(taskContainer.children);
-    if (tasks.length != 0) {
-        tasks.forEach(task => taskContainer.remove(task));
-        console.log("Updated home page list");
-    }
+    taskContainer.innerHTML = `
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    `;
 }
 
 function removeAllTasks() {
@@ -167,6 +173,7 @@ function removeAllTasks() {
         });
     });
     clearTaskListFromScreen();
+    updateTaskList();
 }
 
 /**
@@ -178,7 +185,9 @@ function updateTaskList() {
     if (snapshot.docs.length == 0) {
         taskContainer.innerHTML = "You currently have no tasks!";
     } else {
-        snapshot.docs.forEach(task => {
+        console.log(snapshot.docs)
+        snapshot.docs.sort(sortTasks).forEach(task => {
+            console.log(task.data())
           let name = task.data()["name"];
           let date = task.data()["dueDate"];
           let status = task.data()["taskStatus"];
@@ -190,7 +199,15 @@ function updateTaskList() {
   });
 }
 
+function sortTasks(task1, task2){
+    const nameOfTask1 = task1.data()["name"];
+    const nameOfTask2 = task2.data()["name"];
+    return nameOfTask1.localeCompare(nameOfTask2);
+}
+
 function editButtonListener(task) {
+    console.log("task")
+    console.log(task)
     const buttonDiv = task.children[0].children[0].children[1];
     let editButtonElement = buttonDiv.children[0];
     editButtonElement.addEventListener("click", () => {
@@ -221,9 +238,9 @@ function deleteButtonListener(task) {
 
         // this will be called if the user clicks on the delete task button in the modal
         removeTask = async function() {
-            // taskContainer.remove(task);
+            clearTaskListFromScreen();
             await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").doc(task.getAttribute('data-taskId')).delete();
-            location.reload();
+            updateTaskList();
         }
     });
 }
