@@ -1,8 +1,9 @@
 /**** PROBLEMS *****/
-// 1) delete button does not work (delete all tasks does however)
+// DONE 1) delete button does not work (delete all tasks does however)
 // 2) allow the prevention of duplicate tasks (update instead of adding a new task each time)
 // 3) fix the issue when gathering the current server time to allow the sorting to work. Also there may be an issue with the sorting algorithmn because the return value is undefined for some reason
-// 4) the screen gets bugged when deleteding a task, so it will need to be refreshed in specific cases
+// DONE 4) the screen gets bugged when deleteding a task, so it will need to be refreshed in specific cases
+// 5) Bug occurs when user add task one by one (without reloading the page)
 
 const taskContainer = document.getElementById("task-container");
 
@@ -85,7 +86,7 @@ function addTaskToScreen(name, date, status, length, id) {
 
         currentTask.setAttribute("timecreated", firebase.firestore.FieldValue.serverTimestamp());
         console.log(currentTask.getAttribute("timecreated").value);
-        currentTask.setAttribute('taskId', currentTask.id);
+        currentTask.setAttribute('data-taskId', id);
 
         // add the current task to the list of tasks
         currentTasks.push(currentTask);
@@ -219,9 +220,9 @@ function deleteButtonListener(task) {
         document.querySelectorAll(".task-name").textContent = "TEST";
 
         // this will be called if the user clicks on the delete task button in the modal
-        removeTask = function() {
-            taskContainer.remove(task);
-            db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").doc(task.getAttribute('taskId')).delete();
+        removeTask = async function() {
+            // taskContainer.remove(task);
+            await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").doc(task.getAttribute('data-taskId')).delete();
             location.reload();
         }
     });
