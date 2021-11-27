@@ -1,4 +1,4 @@
-// The Timer class would manage  data variables that are needed to operate the timer.
+// The Timer class would manage data variables that are needed to operate the timer.
 class Timer {
     #intervalID;
     #sessionLength;
@@ -43,6 +43,7 @@ class Timer {
         return this.#millisecondsLeft
     }
 
+    // Initialize and display the timer in the HTML page;
     init() {
         if (document.querySelector('select').value === '') {
             alert("Please choose a task in the dropdown menu.")
@@ -91,6 +92,7 @@ class Timer {
         updateFirebase({ startTime, endTime }, { taskName, taskID });
     }
 
+    // Pause the timer.
     pause() {
         document.querySelector("#pauseFlocus").style.display = "none";
         document.querySelector("#stopFlocus").style.display = "none";
@@ -100,11 +102,13 @@ class Timer {
         document.querySelector("#backgroundMusic").pause();
     }
 
+    // Stop the timer.
     stop() {
         clearInterval(this.#intervalID);
         document.querySelector("#backgroundMusic").pause();
     }
 
+    // Resume the timer.
     resume() {
         document.querySelector("#pauseFlocus").style.display = "block";
         document.querySelector("#stopFlocus").style.display = "block";
@@ -235,5 +239,5 @@ document.querySelector("#taskCompleted").addEventListener('click', () => {
 })
 
 document.querySelector("#taskNotCompleted").addEventListener('click', () => {
-    updateTaskCompletionStatus(false, 0);
+    updateTaskCompletionStatus(false, 0, timerInstance.getTaskID());
 })

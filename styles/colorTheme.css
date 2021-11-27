@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Orbitron:wght@700&family=Playball&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Orbitron:wght@700&family=Roboto:ital,wght@1,300&family=Playball&display=swap');
 
 .bg-primary-color-scheme {
     background-color: #265077;
@@ -8,14 +8,7 @@
     font-family: 'Orbitron', sans-serif;
     font-size: 32px;
 }
-body {
-    padding: 25px;
-    background-color: white;
-    color: black;
-    font-size: 25px;
-}
 
-.dark-mode {
-    background-color: black;
-    color: white;
+.roboto {
+    font-family: 'Roboto', sans-serif;
 }
