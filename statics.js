@@ -1,80 +1,35 @@
-function writeSomeData() {
-    firebase.auth().onAuthStateChanged(function(user) {
-        //if (user) {
-        // User is signed in.
-        var dbref = db.collection("users") //.collection("thisWeeksTasks"); //.doc(user.uid)
-
-        dbref.add({
-            details: "Do comp1800 quiz",
-            size: "M",
-            end_date: firebase.firestore.Timestamp.fromDate(new Date("November 5 ,2021")),
-            timespent: 20,
-        });
-        dbref.add({
-            details: "Do comp1510 lab",
-            size: "M",
-            end_date: firebase.firestore.Timestamp.fromDate(new Date("November 10 ,2021")),
-            timespent: 30
-        });
-        dbref.add({
-            details: "Do comp1800 sprint planning",
-            size: "L",
-            end_date: firebase.firestore.Timestamp.fromDate(new Date("November 3 ,2021")),
-            timespent: 20
-        });
-        dbref.add({
-            details: "Do comp1100 journal",
-            size: "L",
-            end_date: firebase.firestore.Timestamp.fromDate(new Date("November 5 ,2021")),
-            timespent: 60
-        });
-
-        //} //else {
-        // No user is signed in.
-        //}
-        //});
-    })
-}
-//writeSomeData();
-
-
-
-
-
-
-// Display the chart inside the <div> element with id="piechart"
-
-
+// fetching the data from the firebase about the time spent on each task.
 function chartMyData() {
     var labels = []; //insert task names here
     var values = []; //insert timespent values here
 
     //read data from Firestore
     firebase.auth().onAuthStateChanged(function(user) {
-        // if (user) {
-        // User is signed in.
-        db.collection("timerSessions") //.where("size", "==", "L") //search by "L"arge size
-            //.orderBy("end_date") //sort by completion date
-            .get()
-            .then(function(snap) {
-                snap.forEach(function(doc) {
-                    //console.log(doc.data()); //just to check
-                    const yMilis = doc.data().actualTimeSpentForCompletion; //y-axis
-                    let x = doc.data().taskName; //x-axis
-                    let yHours = yMilis * 2.778E-07 * 100;
-                    values.push(yHours); //timespent display on y
-                    labels.push(x); //nickname display on x
-                    //console.log(labels);
-                    //console.log(values);
-                })
-                displayGraph(labels, values);
-            });
-        //} //else {
-        // No user signed in. 
-        // }
-        // })
+        if (user) {
+            // User is signed in.
+            db.collection("user").doc(user.uid).collection("timerSessions")
+                .get()
+                .then(function(snap) {
+                    snap.forEach(function(doc) {
+                        //console.log(doc.data()); //just to check
+                        const yMilis = doc.data().actualTimeSpentForCompletion; //y-axis
+                        let x = doc.data().taskName; //x-axis
+                        //let yHours = ((yMilis *
+                        //10 / 1000) / 180);
+                        values.push(yMilis); //timespent display on y
+                        labels.push(x); //nickname display on x
+                        //console.log(labels);
+                        //console.log(values);
+                    });
+                    displayGraph(labels, values);
+                });
+        } else {
+            // No user signed in. 
+        }
     })
 }
+
+// drawing the chart from fetched data 
 chartMyData();
 
 function displayGraph(xlabels, yvalues) {
@@ -97,21 +52,8 @@ function displayGraph(xlabels, yvalues) {
     const myChart = new Chart(grapharea, config);
 }
 
-//function displaylist() {
-//db.collection("tasks").get()
-//.then(function(snap) {
-//snap.forEach(function(doc) {
 
-//var taskName = doc.data().name; //gets the name field
-//var taskStatus = doc.data().status; //gets the unique ID field
-//console.log(hikeID);
-//document.getElementById('list').innerText = taskName + taskStatus;
-//})
-//})
-
-//}
-//displaylist();
-
+// a function that will display the list of items that are completed by the user
 function addItemsToList(name) {
     var ul = document.getElementsByClassName("list-group");
     var _row = document.createElement("li");
@@ -127,57 +69,29 @@ function addItemsToList(name) {
     ul[0].innerHTML += `<li><span style = "color: green; font-size: 20px;"><i class = "bi bi-check-circle-fill" ></i> </span>${name}</li>`
 
 }
-
+// a function to fetch the data about number of tasks completed.
 function fetchalldata() {
-    //let user1 = firebase.auth().currentUser.uid;
+
     firebase.auth().onAuthStateChanged(function(user) {
         //var user = onAuthStateChanged.user;
         //console.log(user);
         //let user1 = user.uid;;
-        //if (user) {
-        db.collection("users").doc(user.uid).collection("tasks").where("taskStatus", "==", "Done").get().then(function(snap) {
-            snap.forEach(function(doc) {
-                let name = doc.data().name;
-                console.log("element created");
-                //let status = doc.data().taskStatus;
-                addItemsToList(name);
+        if (user) {
+            db.collection("users").doc(user.uid).collection("tasks").where("taskStatus", "==", "Done").get().then(function(snap) {
+                snap.forEach(function(doc) {
+                    let name = doc.data().name;
+                    console.log("element created");
+                    //let status = doc.data().taskStatus;
+                    addItemsToList(name);
+                });
             });
-        });
-
+        }
 
     })
 
 }
 fetchalldata();
-//const data1 = {
-//labels: [
-//'Completed',
-//'Uncompleted',
-// 'Partially-Completed'
-//],
-//datasets: [{
-//label: 'Task Status',
-//data: [7, 8, 9],
-//backgroundColor: [
-// 'rgb(255, 99, 132)',
-// 'rgb(54, 162, 235)',
-//  'rgb(255, 205, 86)'
-//],
-//hoverOffset: 4
-//}]
-//};
-// </block:setup>
-
-// <block:config:0>
-//const config1 = {
-//type: 'pie',
-//data: data1,
-//};
-//const myChart1 = new Chart(
-//document.getElementById('myChart1'),
-//config1
-//);
-// </block:config>
+// a function to fetch the data from the firebase to make the pie chart of number of tasks completed, uncompleted or partially completed.
 function chartMyData1() {
     var labels = []; //insert task names here
     var values = [];
@@ -188,30 +102,30 @@ function chartMyData1() {
         //var user = authResult.user;
         if (user) {
             // User is signed in.
-            db.collection("pieChart") //.where("size", "==", "L") //search by "L"arge size
-                //.orderBy("end_date") //sort by completion date
+            db.collection("pieChart")
                 .get()
                 .then(function(snap) {
                     snap.forEach(function(doc) {
                         //console.log(doc.data()); //just to check
-                        const y = doc.data().partially; //y-axis
-                        let x = doc.data().undone; //x-axis
+                        const y = doc.data().partially;
+                        let x = doc.data().undone;
                         let z = doc.data().taskdone
-                            //let yHours = yMilis * 2.778E-07 * 100;
-                        values.push(y); //timespent display on y
-                        labels.push(x); //nickname display on x
+
+                        values.push(y);
+                        labels.push(x);
                         values2.push(z);
                         //console.log(labels);
                         //console.log(values);
                     })
                     displayGraph1(values, labels, values2);
                 });
-            //} //else {
+        } else {
             // No user signed in. 
         }
         // })
     })
 }
+// a function to display the pie chart.
 chartMyData1();
 
 function displayGraph1(xlabels, ylabels, zlabels) {
