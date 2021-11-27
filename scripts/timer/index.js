@@ -239,5 +239,5 @@ document.querySelector("#taskCompleted").addEventListener('click', () => {
 })
 
 document.querySelector("#taskNotCompleted").addEventListener('click', () => {
-    updateTaskCompletionStatus(false, 0);
+    updateTaskCompletionStatus(false, 0, timerInstance.getTaskID());
 })

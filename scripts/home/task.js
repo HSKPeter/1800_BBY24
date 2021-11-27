@@ -145,18 +145,19 @@ function sortByServerTime(tasks) {
 async function addTaskDataToFirebase(name, date, status, length, taskID) {
     //put the task data into firestore database (needs to be changed so that duplicate data isn't always added when editing a task)
     if (taskID){
-        await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").doc(taskID).set({
+        await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").doc(taskID).update({
             name: name,
             dueDate: date,
             taskStatus: status,
-            taskLength: length
+            taskLength: length,    
         });
     } else {
         await db.collection("users").doc(localStorage.getItem("userId")).collection("tasks").add({
             name: name,
             dueDate: date,
             taskStatus: status,
-            taskLength: length
+            taskLength: length,
+            timeSpent: 0
         });
     }
 }
