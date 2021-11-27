@@ -186,29 +186,29 @@ function chartMyData1() {
     //read data from Firestore
     firebase.auth().onAuthStateChanged(function(user) {
         //var user = authResult.user;
-        // if (user) {
-        // User is signed in.
-        db.collection("pieChart") //.where("size", "==", "L") //search by "L"arge size
-            //.orderBy("end_date") //sort by completion date
-            .get()
-            .then(function(snap) {
-                snap.forEach(function(doc) {
-                    //console.log(doc.data()); //just to check
-                    const y = doc.data().partially; //y-axis
-                    let x = doc.data().undone; //x-axis
-                    let z = doc.data().taskdone
-                        //let yHours = yMilis * 2.778E-07 * 100;
-                    values.push(y); //timespent display on y
-                    labels.push(x); //nickname display on x
-                    values2.push(z);
-                    //console.log(labels);
-                    //console.log(values);
-                })
-                displayGraph1(values, labels, values2);
-            });
-        //} //else {
-        // No user signed in. 
-        // }
+        if (user) {
+            // User is signed in.
+            db.collection("pieChart") //.where("size", "==", "L") //search by "L"arge size
+                //.orderBy("end_date") //sort by completion date
+                .get()
+                .then(function(snap) {
+                    snap.forEach(function(doc) {
+                        //console.log(doc.data()); //just to check
+                        const y = doc.data().partially; //y-axis
+                        let x = doc.data().undone; //x-axis
+                        let z = doc.data().taskdone
+                            //let yHours = yMilis * 2.778E-07 * 100;
+                        values.push(y); //timespent display on y
+                        labels.push(x); //nickname display on x
+                        values2.push(z);
+                        //console.log(labels);
+                        //console.log(values);
+                    })
+                    displayGraph1(values, labels, values2);
+                });
+            //} //else {
+            // No user signed in. 
+        }
         // })
     })
 }
