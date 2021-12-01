@@ -22,12 +22,8 @@
             font-size: 36px;
         }
 
-        #appTitle {
-            font-size: 32px;
-        }
-
         body {
-            padding: 25px;
+            /* padding: 25px; */
             background-color: white;
             color: black;
             font-size: 25px;
@@ -36,6 +32,7 @@
         .dark-mode {
             background-color: black;
             color: white;
+        }
     </style>
 </head>
 
@@ -45,7 +42,7 @@
     <!-- Your own HTML layout goes here -->
     <!------------------------------------>
 
-    <nav class="navbar navbar-light bg-secondary mb-3">
+    <nav class="navbar navbar-light bg-primary-color-scheme mb-3">
         <div class="container py-2">
             <a class="navbar-brand text-white" href="home.html" id="appTitle">Flocus</a>
             <a href="settings.html"><i class="material-icons text-white">settings</i></a>
@@ -56,7 +53,7 @@
         <h1 class="display-5 fw-bold">Settings</h1>
         <br>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Help
         </button>
 
@@ -76,7 +73,7 @@
                         </ol>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -84,17 +81,14 @@
         <br>
         <br>
         <div class="dropdown">
-            <button class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            <button class="btn btn-dark btn-lg" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                 aria-expanded="false" onclick="toggleColorTheme()">
                 Change colour theme
             </button>
         </div>
         <br>
-        <button type="button" class="btn btn-secondary btn-lg text-nowrap">Reset to default</button>
-        <br>
-        <br>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal2">
             Logout
         </button>
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
@@ -109,9 +103,9 @@
                         Are you sure?
                     </div>
                     <div class="modal-footer">
-                        <a href="login.html"><button type="button" class="btn btn-secondary"
+                        <a href="login.html"><button type="button" class="btn btn-dark"
                                 data-bs-dismiss="modal">Yes</button></a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">No</button>
                     </div>
                 </div>
             </div>
@@ -120,7 +114,7 @@
 
 
 
-    <footer class="navbar justify-content-evenly bg-secondary fixed-bottom">
+    <footer class="navbar justify-content-evenly bg-primary-color-scheme fixed-bottom">
         <div class="container py-2 mx-5">
             <a href="timer.html"><i class="material-icons text-white">timer</i></a>
             <a href="home.html"><i class="material-icons text-white">list</i></a>
