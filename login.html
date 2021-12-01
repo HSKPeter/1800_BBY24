@@ -52,6 +52,14 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script>
+        // Redirect users to home.html if they have already signed in.
+        firebase.auth().onAuthStateChanged(user => {
+            console.log(user);
+            if (user) {
+                window.location.replace("/home.html");
+            }
+        });
+
         // Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
         var uiConfig = {
