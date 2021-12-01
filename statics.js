@@ -7,21 +7,25 @@ function chartMyData() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            db.collection("user").doc(user.uid).collection("timerSessions")
+            db.collection("users").doc(user.uid).collection("timerSessions")
                 .get()
                 .then(function(snap) {
+                    console.log(snap);
                     snap.forEach(function(doc) {
                         //console.log(doc.data()); //just to check
-                        const yMilis = doc.data().actualTimeSpentForCompletion; //y-axis
+                        const yMilis = doc.data().actualTimeSpentForCompletion;
+                        //y-axis
+                        console.log(yMilis);
                         let x = doc.data().taskName; //x-axis
-                        //let yHours = ((yMilis *
-                        //10 / 1000) / 180);
-                        values.push(yMilis); //timespent display on y
+                        let yHours = (yMilis / 60000);
+                        values.push(yHours); //timespent display on y
                         labels.push(x); //nickname display on x
                         //console.log(labels);
                         //console.log(values);
                     });
+                    console.log(labels, values);
                     displayGraph(labels, values);
+
                 });
         } else {
             // No user signed in. 
