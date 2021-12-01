@@ -9,9 +9,9 @@
             </div>
         </div>
         <div class="card-text mt-3">
-            <div class="task-due-date">Due Date: <span class="task-due-date-data"></span></div>
+            <div class="task-due-date">Due Date: <span class="task-due-date-data"></span></div>            
+            <div class="task-status">Task Status: <span class="task-status-data"></span></div>
             <div class="task-length">Task Length: <span class="task-length-data"></span></div>
-            <div class="task-status">Task Length: <span class="task-status-data"></span></div>
         </div>
     </div>
 </div>

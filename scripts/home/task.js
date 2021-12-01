@@ -193,11 +193,12 @@ function removeAllTasks() {
 function updateTaskList() {
     let currentUser = db.collection("users").doc(localStorage.getItem("userId"));
     currentUser.collection("tasks").get().then(snapshot => {
-        if (snapshot.docs.length == 0) {
+        const uncompletedTasks = snapshot.docs.filter(isUncompletedTask)
+        if (uncompletedTasks.length == 0) {
             taskContainer.innerHTML = "You currently have no tasks!";
         } else {
-            console.log(snapshot.docs)
-            snapshot.docs.sort(sortTasks).forEach(task => {
+            console.log(uncompletedTasks)
+            uncompletedTasks.sort(sortTasks).forEach(task => {
                 console.log(task.data())
                 let name = task.data()["name"];
                 let date = task.data()["dueDate"];
@@ -208,6 +209,10 @@ function updateTaskList() {
             });
         }
     });
+}
+
+function isUncompletedTask(task){
+    return task.data()["taskStatus"] !== "Done";
 }
 
 function editButtonListener(task) {

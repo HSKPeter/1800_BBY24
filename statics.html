@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/styles/colorTheme.css">
 
+    <link rel="stylesheet" href="yearGraph.css">
+
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -47,6 +49,18 @@
         .bg-primary-color-scheme {
             background-color: #265077;
         }
+        
+        body {
+            /* padding: 25px; */
+            background-color: white;
+            color: black;
+            font-size: 25px;
+        }
+        
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
     </style>
 
 </head>
@@ -78,6 +92,7 @@
                 </div>
                 <div id="button1">
                     <div class="d-flex justify-content-end mt-2">
+                        <button type="button" class="btn btn-lg btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#yearGraphModal">Year Graph</button>
                         <button type="button" class="btn btn-secondary btn-lg btn-block me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Task  Status
                     </button>
@@ -170,10 +185,55 @@
         </div>
     </footer>
 
+    <!-- Modal to create Year Graph-->
+    <div class="modal fade" id="yearGraphModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Year Graph</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="graphContainer">
+                        <!-- Reference source: https://bitsofco.de/github-contribution-graph-css-grid/ -->
+                        <div class="graph">
+                            <ul class="months">
+                                <li>Jan</li>
+                                <li>Feb</li>
+                                <li>Mar</li>
+                                <li>Apr</li>
+                                <li>May</li>
+                                <li>Jun</li>
+                                <li>Jul</li>
+                                <li>Aug</li>
+                                <li>Sep</li>
+                                <li>Oct</li>
+                                <li>Nov</li>
+                                <li>Dec</li>
+                            </ul>
+                            <ul class="days">
+                                <li>Sun</li>
+                                <li>Mon</li>
+                                <li>Tue</li>
+                                <li>Wed</li>
+                                <li>Thu</li>
+                                <li>Fri</li>
+                                <li>Sat</li>
+                            </ul>
+                            <ul class="squares">
+                                <!-- added via javascript -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--------------------------------------------------->
     <!-- Your Javascript Libraries and scripts go here -->
     <!--------------------------------------------------->
-
+    <script src="scripts/loginAuthentication.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js">
     </script>
@@ -182,7 +242,7 @@
 
 
     <script src="statics.js"></script>
-
+    <script src="yearGraph.js"></script>
 
 
 
