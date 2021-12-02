@@ -1,4 +1,10 @@
-// Interval is set in order to compute the ms left and update the timer continuously.
+/**
+ * Set interval to compute the ms left and update the timer continuously.
+ * @param {Date} startTime 
+ * @param {Date} endTime 
+ * @param {number} ms 
+ * @returns {number}
+ */
 function updateTimer(startTime, endTime, ms) {
     const intervalId = setInterval(function() {
         const current = new Date().getTime();

@@ -1,4 +1,6 @@
-// The Timer class would manage data variables that are needed to operate the timer.
+/**
+ * The Timer class would manage data variables that are needed to operate the timer.
+ */
 class Timer {
     #intervalID;
     #sessionLength;
@@ -6,44 +8,82 @@ class Timer {
     #isPlayingMusic;
     #taskID;
 
+    /**
+     * 
+     */
     constructor() {
         this.#isPlayingMusic = true;
     };
 
+    /**
+     * Mutator of interval ID.
+     * @param {number} id 
+     */
     setIntervalID(id) {
         this.#intervalID = id;
     }
 
+    /**
+     * Accessor of interval ID.
+     * @returns {number}
+     */
     getIntervalID() {
         return this.#intervalID;
     }
 
+    /**
+     * Mutator of task ID.
+     * @param {*} id 
+     */
     setTaskID(id) {
         this.#taskID = id;
     }
 
+    /**
+     * Accessor of task ID.
+     * @returns 
+     */
     getTaskID() {
         return this.#taskID;
     }
 
+    /**
+     * Mutator of the length of the countdown session. 
+     * @param {number} sessionLength 
+     */
     setSessionLength(sessionLength) {
         this.#sessionLength = sessionLength;
     }
 
+    /**
+     * Accessor of the length of the countdown session.
+     * @returns 
+     */
     getSessionLength() {
         return this.#sessionLength;
     }
 
+    /**
+     * Mutator of the value of the remaining milliseconds.
+     * @param {*} ms 
+     */
     setMillisecondsLeft(ms) {
         setMsInFirebase(ms);
         this.#millisecondsLeft = ms;
     }
 
+    /**
+     * Accessor of the value of the remaining milliseconds.
+     * @returns 
+     */
     getMillisecondsLeft() {
         return this.#millisecondsLeft
     }
 
-    // Initialize and display the timer in the HTML page;
+    /**
+     * Initialize and display the timer in the HTML page.
+     * @returns 
+     */
     init() {
         if (document.querySelector('select').value === '') {
             alert("Please choose a task in the dropdown menu.")
@@ -92,7 +132,9 @@ class Timer {
         updateFirebase({ startTime, endTime }, { taskName, taskID });
     }
 
-    // Pause the timer.
+    /**
+     * Pause the timer.
+     */
     pause() {
         document.querySelector("#pauseFlocus").style.display = "none";
         document.querySelector("#stopFlocus").style.display = "none";
@@ -102,13 +144,17 @@ class Timer {
         document.querySelector("#backgroundMusic").pause();
     }
 
-    // Stop the timer.
+    /**
+     * Stop the timer.
+     */
     stop() {
         clearInterval(this.#intervalID);
         document.querySelector("#backgroundMusic").pause();
     }
 
-    // Resume the timer.
+    /**
+     * Resume the timer.
+     */
     resume() {
         document.querySelector("#pauseFlocus").style.display = "block";
         document.querySelector("#stopFlocus").style.display = "block";
@@ -124,6 +170,9 @@ class Timer {
         timerInstance.setIntervalID(intervalId);
     }
 
+    /**
+     * Change settings of the background music (i.e. mute / unmute).
+     */
     changeMusicSetting() {
         if (this.#isPlayingMusic === true) {
             document.querySelector("#music").dataset.music = 'off';

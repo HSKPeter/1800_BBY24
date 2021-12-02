@@ -1,4 +1,11 @@
-// This function updates the Firebase data regarding the timer session.
+// "Countdown" and "timer session" are interchangeable terms sharing the same meaning.
+
+/**
+ * Updates the Firebase data regarding the timer session.
+ * @param { {startTime: Date, endTime: Date} } timeInfo 
+ * @param { {taskName: String, taskID: number} } taskInfo 
+ * @returns {Promise}
+ */
 async function updateFirebase(timeInfo, taskInfo) {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(async(user) => {
@@ -21,6 +28,11 @@ async function updateFirebase(timeInfo, taskInfo) {
     })
 }
 
+/**
+ * Updates the value of remaining milliseconds of the active timer session in Firebase.
+ * @param {number} msLeft 
+ * @returns {Promise}
+ */
 async function setMsInFirebase(msLeft) {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(async(user) => {
@@ -42,6 +54,10 @@ async function setMsInFirebase(msLeft) {
     })
 }
 
+/**
+ * Update Firebase and set the active timer session as inactive.
+ * @returns {Promise}
+ */
 async function deactivateSessionInFirebase() {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(async(user) => {
@@ -66,6 +82,13 @@ async function deactivateSessionInFirebase() {
     })
 }
 
+/**
+ * Update the task completion status in Firebase.
+ * @param {boolean} status 
+ * @param {number} msLeft 
+ * @param {null | String} taskID 
+ * @returns {Promise}
+ */
 async function updateTaskCompletionStatus(status, msLeft, taskID = null) {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(async(user) => {
@@ -110,6 +133,10 @@ async function updateTaskCompletionStatus(status, msLeft, taskID = null) {
     })
 }
 
+/**
+ * Access the details of the active timer session from Firebase
+ * @returns {Promise}
+ */
 async function getSessionStatusFromFirebase() {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(async(user) => {
@@ -129,6 +156,10 @@ async function getSessionStatusFromFirebase() {
 
 }
 
+/**
+ * Access the task details from Firebase.
+ * @returns {Promise}
+ */
 async function getTasksFromFirebase() {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(async(user) => {
