@@ -5,3 +5,14 @@ firebase.auth().onAuthStateChanged(user => {
         window.location.replace("/login.html");
     }
 });
+
+
+function signOut() {
+    firebase.auth().signOut().then(() => {
+        window.location.replace("/login.html");
+      }).catch((error) => {
+        console.log("Error in sign out.")
+      });
+}
+
+
