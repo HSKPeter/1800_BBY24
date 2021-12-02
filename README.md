@@ -36,9 +36,6 @@ Content of the project folder:
 
 It has the following subfolders and files:
 ├── .git                        # Folder for git repo
-├── audio                       # Folder for audio files
-    /flocus-music.m4a
-    /notification.m4a
 ├── scripts                     # Folder for scripts
     ├── commonAcrossPages
         /loginAuthentication.js
@@ -56,6 +53,7 @@ It has the following subfolders and files:
         /updateFirebase.js
         /updateProgressBar.js
         /updateTimer.js
+    /apiKey.js                  # ignored by git
     /apiKey-sample.js
 ├── styles                      # Folder for styles
     /colorTheme.css
@@ -63,6 +61,9 @@ It has the following subfolders and files:
     /timer.css
     /yearGraph.css
 ├── utilities                   # Folder for utilities files    
+    ├── audio                   # Folder for audio files
+        /flocus-music.m4a
+        /notification.m4a
     /quotes.txt
     /task.xml
 
