@@ -1,3 +1,4 @@
+// This function continuously updates the layout of progress bar of the timer as the countdown is underway.
 function updateProgressBar(startTime, endTime){
     const sessionLengthInMs= endTime - startTime;
     const current = new Date().getTime();

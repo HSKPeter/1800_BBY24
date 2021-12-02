@@ -1,3 +1,5 @@
+// Format number such that number less than 10 would have a preceding zero.
+// This function would be used to format the number in the input field in the timer.
 function formatNumbers(num){
     const numInStringForm = num.toString()
     if (numInStringForm.length === 1){

@@ -1,3 +1,4 @@
+// This function updates the Firebase data regarding the timer session.
 async function updateFirebase(timeInfo, taskInfo) {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(async(user) => {
