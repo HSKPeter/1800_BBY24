@@ -4,6 +4,7 @@
 - [General Info](#general-info)
 - [Technologies](#technologies)
 - [Content](#content)
+- [Naming conventions](#naming-conventions)
 
 ## General Info
 This browser based web application to ...
@@ -14,35 +15,64 @@ This browser based web application to ...
 
 ## Technologies
 Technologies used for this project:
-* HTML, CSS
+* HTML
+* CSS
 * JavaScript
 * Bootstrap 
+* Firebase
 	
 ## Content
 Content of the project folder:
 
 ```
  Top level of project folder: 
-├── .gitignore               # Git ignore file
-├── index.html               # landing HTML file, this is what users see when you come to url
-└── README.md
+├── .gitignore                  # Git ignore file
+├── home.html                   # HTML file of landing page (for logged-in users)
+├── login.html                  # HTML file of landing page (for users who have not logged in)
+├── README.md               
+├── settings.html               # HTML file of settings page where logged-in users could customize the settings
+├── statics.html                # HTML file of statics page where logged-in users could view their achievements and graphs about their activities
+└── timer.html                  # HTML file of timer page where logged-in users could invoke a timer.
 
 It has the following subfolders and files:
-├── .git                     # Folder for git repo
-├── images                   # Folder for images
-    /blah.jpg                # 
-├── scripts                  # Folder for scripts
-    /blah.js                 # 
-├── styles                   # Folder for styles
-    /blah.css                # 
+├── .git                        # Folder for git repo
+├── audio                       # Folder for audio files
+    /flocus-music.m4a
+    /notification.m4a
+├── scripts                     # Folder for scripts
+    ├── commonAcrossPages
+        /loginAuthentication.js
+        /sortTasks.js
+    ├── home
+        /homeAsideContent.js
+        /task.js        
+    ├── statics
+        /statics.js
+        /yearGraph.js
+    ├── timer
+        /formatNumbers.js
+        /index.js
+        /startCountDown.js
+        /updateFirebase.js
+        /updateProgressBar.js
+        /updateTimer.js
+    /apiKey-sample.js
+├── styles                      # Folder for styles
+    /colorTheme.css
+    /home.css
+    /timer.css
+    /yearGraph.css
+├── utilities                   # Folder for utilities files    
+    /quotes.txt
+    /task.xml
 
 Firebase hosting files: 
 ├── .firebaserc...
 
 
 ```
-
-Tips for file naming files and folders:
+## Naming conventions
+Rules for file naming files and folders:
 * use lowercase with no spaces
 * use dashes (not underscore) for word separation
 
