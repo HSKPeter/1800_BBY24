@@ -96,7 +96,7 @@ async function updateTaskCompletionStatus(status, msLeft, taskID = null) {
                         taskStatus: "Done",
                         timeSpent: timeSpent
                     });
-                    window.location.assign("statics.html");
+                    window.location.assign("statistics.html");
                 } else {
                     await taskDoc.update({
                         taskStatus: "In-Progress",

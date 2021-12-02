@@ -31,7 +31,7 @@ Content of the project folder:
 ├── login.html                  # HTML file of landing page (for users who have not logged in)
 ├── README.md               
 ├── settings.html               # HTML file of settings page where logged-in users could customize the settings
-├── statics.html                # HTML file of statics page where logged-in users could view their achievements and graphs about their activities
+├── statistics.html                # HTML file of statics page where logged-in users could view their achievements and graphs about their activities
 └── timer.html                  # HTML file of timer page where logged-in users could invoke a timer.
 
 It has the following subfolders and files:
@@ -47,7 +47,7 @@ It has the following subfolders and files:
         /homeAsideContent.js
         /task.js        
     ├── statics
-        /statics.js
+        /statistics.js
         /yearGraph.js
     ├── timer
         /formatNumbers.js
