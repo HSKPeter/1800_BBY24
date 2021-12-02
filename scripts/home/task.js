@@ -38,6 +38,7 @@ function addTask() {
  * This function wipes all the task fields (used upon clicking the button to create a new task)
  */
 function wipeTaskInputFields() {
+    document.querySelector("#task-info-modal-title").innerText = "Create New Task";
     document.querySelector("#task-name-choice").value = "";
     document.querySelector("#task-date-choice").value = "";
     document.querySelector("#task-length-choice").value = "";
@@ -72,7 +73,7 @@ async function uploadTask(name, date, status, length, taskID) {
  */
 function addTaskToScreen(name, date, status, length, id) {
     taskContainer.innerHTML = "";
-    fetch("task.xml").then(response => response.text()).then(data => {
+    fetch("utilities/task.xml").then(response => response.text()).then(data => {
         let currentTasks = Array.from(taskContainer.children);
 
         // append the xml string to the innerHTML of taskContainer to turn it into an element
@@ -260,7 +261,7 @@ function deleteButtonListener(task) {
 
 // This function I am currently working on to upload quotes to firebase (leave this to Clayton)
 async function loadQuotesToFirebase() {
-    let fileContent = await fetch("../../quotes.txt");
+    let fileContent = await fetch("../../utilities/quotes.txt");
     let fileText = await fileContent.text();
     let quotes = fileText.split("\n");
     for (let i = 0; i < quotes.length; i++) {
