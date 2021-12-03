@@ -268,9 +268,9 @@ document.querySelectorAll('.pauseCountDown').forEach(element => element.addEvent
     timerInstance.stop();
 }));
 
-// A modal would be prompted when a countdown session is ended.  
-// Users would be asked whether they have completed the particular task within that countdown session.  
-// The "yes" and "no" buttons in this modal share the class "updateTaskProgress".
+/* A modal would be prompted when a countdown session is ended.  
+Users would be asked whether they have completed the particular task within that countdown session.  
+The "yes" and "no" buttons in this modal share the class "updateTaskProgress". */
 document.querySelectorAll(".updateTaskProgress").forEach(inputField => inputField.addEventListener("click", () => {
     document.querySelector("#notification").pause();
 }))
