@@ -36,6 +36,8 @@ Content of the project folder:
 
 It has the following subfolders and files:
 ├── .git                        # Folder for git repo
+├── .firebase                   # Folder for Firebase
+    /hosting..cache
 ├── scripts                     # Folder for scripts
     ├── commonAcrossPages
         /loginAuthentication.js
@@ -68,7 +70,13 @@ It has the following subfolders and files:
     /task.xml
 
 Firebase hosting files: 
-├── .firebaserc...
+├── .firebaserc
+├── 404.html
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── storage.rules
+
 
 
 ```
