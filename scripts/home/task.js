@@ -1,15 +1,3 @@
-/**** PROBLEMS *****/
-// DONE 1) delete button does not work (delete all tasks does however)
-// DONE 2) allow the prevention of duplicate tasks (update instead of adding a new task each time)
-// DONE 3) fix the issue when gathering the current server time to allow the sorting to work. Also there may be an issue with the sorting algorithmn because the return value is undefined for some reason
-// (sorted tasks alphabetically)
-// DONE 4) the screen gets bugged when deleteding a task, so it will need to be refreshed in specific cases
-// DONE 5) Bug occurs when user add task one by one (without reloading the page)
-// DONE 6) Add loading spinner
-// DONE 7) After the user deletes a task, the task list is reloaded by AJAX calls, without reloading the whole page
-// DONE 8) Fixed bugs of delete all tasks
-// DONE 9) Set pending as default
-// DONE 10) Bug of deleting all tasks
 const taskContainer = document.getElementById("task-container");
 
 updateTaskList();
@@ -212,6 +200,7 @@ function updateTaskList() {
     });
 }
 
+/** Identify if the task has been done or not. */
 function isUncompletedTask(task){
     return task.data()["taskStatus"] !== "Done";
 }
