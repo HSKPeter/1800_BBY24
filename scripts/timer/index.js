@@ -34,7 +34,7 @@ class Timer {
 
     /**
      * Mutator of task ID.
-     * @param {*} id 
+     * @param {string} id 
      */
     setTaskID(id) {
         this.#taskID = id;
@@ -42,7 +42,7 @@ class Timer {
 
     /**
      * Accessor of task ID.
-     * @returns 
+     * @returns {string}
      */
     getTaskID() {
         return this.#taskID;
@@ -58,7 +58,7 @@ class Timer {
 
     /**
      * Accessor of the length of the countdown session.
-     * @returns 
+     * @returns {number}
      */
     getSessionLength() {
         return this.#sessionLength;
@@ -66,7 +66,7 @@ class Timer {
 
     /**
      * Mutator of the value of the remaining milliseconds.
-     * @param {*} ms 
+     * @param {number} ms 
      */
     setMillisecondsLeft(ms) {
         setMsInFirebase(ms);
@@ -75,7 +75,7 @@ class Timer {
 
     /**
      * Accessor of the value of the remaining milliseconds.
-     * @returns 
+     * @returns {number}
      */
     getMillisecondsLeft() {
         return this.#millisecondsLeft
