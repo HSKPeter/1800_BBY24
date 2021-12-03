@@ -9,9 +9,10 @@ class Timer {
     #taskID;
 
     /**
-     * 
+     * Construct the Timer instance.
      */
     constructor() {
+        // Background music would be played by default.
         this.#isPlayingMusic = true;
     };
 
