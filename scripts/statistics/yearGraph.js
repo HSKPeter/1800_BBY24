@@ -1,5 +1,4 @@
-// Add squares
-
+// Add color for the squares in the year graph
 const squares = document.querySelector('.squares');
 for (var i = 1; i < 365; i++) {
     const level = Math.floor(Math.random() * 3);
