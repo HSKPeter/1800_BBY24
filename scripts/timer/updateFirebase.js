@@ -75,7 +75,7 @@ async function deactivateSessionInFirebase() {
                     taskCompleted: false,
                     msLeft: 0
                 });
-                window.location.assign("home.html");
+                window.location.assign("index.html");
             }
             resolve()
         });
@@ -125,7 +125,7 @@ async function updateTaskCompletionStatus(status, msLeft, taskID = null) {
                         taskStatus: "In-Progress",
                         timeSpent: timeSpent
                     });
-                    window.location.assign("home.html");
+                    window.location.assign("index.html");
                 }
                 resolve();
             }
