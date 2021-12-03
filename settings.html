@@ -17,14 +17,14 @@
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/colorTheme.css">
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <script src="scripts/apiKey.js"></script>
-    
+
     <style>
         .material-icons {
             font-size: 36px;
@@ -54,11 +54,7 @@
 </head>
 
 <body>
-
-    <!------------------------------------>
-    <!-- Your own HTML layout goes here -->
-    <!------------------------------------>
-
+    <!-- Top banner -->
     <nav class="navbar navbar-light bg-primary-color-scheme mb-3">
         <div class="container py-2">
             <a class="navbar-brand text-white" href="index.html" id="appTitle">Flocus</a>
@@ -69,12 +65,12 @@
     <div class="px-4 py-5 my-5 text-center">
         <h1 class="display-5 fw-bold">Settings</h1>
         <br>
-        <!-- Button trigger modal -->
+        <!-- Help button -->
         <button type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Help
         </button>
 
-        <!-- Modal -->
+        <!-- Help Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -97,17 +93,19 @@
         </div>
         <br>
         <br>
-        <div class="dropdown">
-            <button class="btn btn-dark btn-lg" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                aria-expanded="false" onclick="toggleColorTheme()">
+        <!-- Change colour theme button-->
+        <div>
+            <button class="btn btn-dark btn-lg" type="button" aria-expanded="false" onclick="toggleColorTheme()">
                 Change colour theme
             </button>
         </div>
         <br>
-        <!-- Button trigger modal -->
+        <!-- Logout button -->
         <button type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal2">
             Logout
         </button>
+
+        <!-- Logout modal -->
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -120,17 +118,15 @@
                         Are you sure?
                     </div>
                     <div class="modal-footer">
-                            <button type="button" class="btn btn-dark"
-                                data-bs-dismiss="modal" onclick="signOut()">Yes</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
+                            onclick="signOut()">Yes</button>
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">No</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
+    <!-- Navbar -->
     <footer class="navbar justify-content-evenly bg-primary-color-scheme fixed-bottom">
         <div class="container py-2 mx-5">
             <a href="timer.html"><i class="material-icons text-white">timer</i></a>
