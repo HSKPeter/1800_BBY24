@@ -6,7 +6,9 @@ firebase.auth().onAuthStateChanged(user => {
     }
 });
 
-
+/**
+ * Sign out the user.
+ */
 function signOut() {
     firebase.auth().signOut().then(() => {
         window.location.replace("/login.html");
