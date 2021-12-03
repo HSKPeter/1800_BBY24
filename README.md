@@ -53,7 +53,7 @@ It has the following subfolders and files:
         /updateFirebase.js
         /updateProgressBar.js
         /updateTimer.js
-    /apiKey.js                  # ignored by git
+    /apiKey.js                  # (Ignored by git)
     /apiKey-sample.js
 ├── styles                      # Folder for styles
     /colorTheme.css
