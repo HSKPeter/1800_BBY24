@@ -26,8 +26,9 @@ Content of the project folder:
 
 ```
  Top level of project folder: 
+├── .firebase                   # Firebase hosting cache file
 ├── .gitignore                  # Git ignore file
-├── index.html                   # HTML file of landing page (for logged-in users)
+├── index.html                  # HTML file of landing page (for logged-in users)
 ├── login.html                  # HTML file of landing page (for users who have not logged in)
 ├── README.md               
 ├── settings.html               # HTML file of settings page where logged-in users could customize the settings
