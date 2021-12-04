@@ -129,9 +129,9 @@ function chartMyData1() {
         // })
     })
 }
-// a function to display the pie chart.
-chartMyData1();
 
+chartMyData1();
+// a function to display the pie chart.
 function displayGraph1(xlabels, ylabels, zlabels) {
     var grapharea = document.getElementById('myChart1');
     //assemble data and launch chart
