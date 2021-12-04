@@ -2,12 +2,16 @@
 
 - [Flocus](#flocus)
 - [General Info](#general-info)
+- [Contributors](#contributors)
 - [Technologies](#technologies)
 - [Content](#content)
 - [Naming conventions](#naming-conventions)
 
 ## General Info
-This browser based web application to ...
+* Flocus is a play on words for "flow" and "focus".
+* This browser based web application includes the timer and to-do list features to help high school and post-secondary students struggling with focusing and time management, so they can stay on task and be more productive.
+
+## Contributors
 * Hi My name is Nimrat. I'm excited about this project because I'm going to develop my first project in the real time environment. 
 * Hi my name is Daniel. I'm excited about this project because I am learning a lot about coding and the creation process
 * Hello this is Clayton Hunter. I am looking forward to mastering git and github!
